@@ -1,0 +1,115 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import { ArrowRight, Users, UserPlus } from "lucide-react";
+import { Button } from "@/components/ui/Button";
+
+export const metadata: Metadata = {
+  title: "Register — BPL Season 1",
+  description: "Register for BPL Season 1. Two paths: Register your team (12–20 players) or sign up as a free agent to be placed via the draft.",
+};
+
+export default function RegisterPage() {
+  return (
+    <div className="pt-24">
+      <section className="py-20" aria-labelledby="register-heading">
+        <div className="section-container">
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <span className="badge badge-crimson mb-6" aria-hidden="true">Registration Open</span>
+            <h1
+              id="register-heading"
+              className="font-heading font-bold text-4xl sm:text-5xl md:text-6xl mb-6"
+              style={{ color: "var(--slate-50)" }}
+            >
+              Join BPL{" "}
+              <span className="gradient-text">Season 1</span>
+            </h1>
+            <p className="text-lg sm:text-xl leading-relaxed" style={{ color: "var(--slate-400)" }}>
+              Two registration tracks. Both cost RM 20 per player.
+              Both lead to competitive baseball. Choose yours below.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            {/* Team  */}
+            <Link
+              href="/register/team"
+              className="glass-card glass-card-hover p-10 flex flex-col items-center text-center group cursor-pointer"
+              style={{ border: "1px solid rgba(245,166,35,0.2)" }}
+              role="button"
+            >
+              <div
+                className="w-20 h-20 rounded-2xl flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-110"
+                style={{ background: "rgba(245,166,35,0.1)", border: "1px solid rgba(245,166,35,0.2)" }}
+              >
+                <Users size={36} style={{ color: "var(--gold-400)" }} aria-hidden="true" />
+              </div>
+              <div className="badge badge-gold mb-4">Track A</div>
+              <h2 className="font-heading font-bold text-2xl sm:text-3xl mb-3" style={{ color: "var(--slate-50)" }}>
+                Register a Team
+              </h2>
+              <p className="text-base leading-relaxed mb-6" style={{ color: "var(--slate-400)" }}>
+                Form your roster of 12–20 players, submit your team details, and compete as a 
+                fully registered BPL team from Day 1.
+              </p>
+              <div
+                className="inline-flex items-center gap-2 text-sm font-semibold"
+                style={{ color: "var(--gold-400)" }}
+              >
+                Start team registration
+                <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" aria-hidden="true" />
+              </div>
+            </Link>
+
+            {/* Free agent */}
+            <Link
+              href="/register/free-agent"
+              className="glass-card glass-card-hover p-10 flex flex-col items-center text-center group cursor-pointer"
+              style={{ border: "1px solid rgba(227,27,35,0.25)" }}
+              role="button"
+            >
+              <div
+                className="w-20 h-20 rounded-2xl flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-110"
+                style={{ background: "rgba(227,27,35,0.1)", border: "1px solid rgba(227,27,35,0.2)" }}
+              >
+                <UserPlus size={36} style={{ color: "var(--crimson-400)" }} aria-hidden="true" />
+              </div>
+              <div className="badge badge-crimson mb-4">Track B</div>
+              <h2 className="font-heading font-bold text-2xl sm:text-3xl mb-3" style={{ color: "var(--slate-50)" }}>
+                Free Agent
+              </h2>
+              <p className="text-base leading-relaxed mb-6" style={{ color: "var(--slate-400)" }}>
+                No team? No problem. Register, get evaluated at the April 19/20 assessment, 
+                and get placed via the BPL Draft for competitive balance.
+              </p>
+              <div
+                className="inline-flex items-center gap-2 text-sm font-semibold"
+                style={{ color: "var(--crimson-400)" }}
+              >
+                Register as free agent
+                <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" aria-hidden="true" />
+              </div>
+            </Link>
+          </div>
+
+          {/* Bottom note */}
+          <div className="glass-card p-6 sm:p-8 max-w-2xl mx-auto mt-12 text-center">
+            <p className="font-heading font-semibold text-sm mb-2" style={{ color: "var(--slate-200)" }}>
+              Registration Fee
+            </p>
+            <p className="text-sm leading-relaxed" style={{ color: "var(--slate-400)" }}>
+              RM 20 per player for both tracks. Team managers collect and submit fees in bulk.
+              Free agents pay directly. Questions?{" "}
+              <a
+                href="https://wa.me/601022763014"
+                className="underline underline-offset-4 transition-colors hover:text-white"
+                style={{ color: "var(--crimson-400)" }}
+              >
+                WhatsApp Commissioner Basit
+              </a>.
+            </p>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}

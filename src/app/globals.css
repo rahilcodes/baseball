@@ -1,26 +1,367 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* ============================================
+   BPL DESIGN SYSTEM — PREMIUM SPORTS PLATFORM
+   ============================================ */
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    /* 8px Grid Base */
+    --space-1: 8px;
+    --space-2: 16px;
+    --space-3: 24px;
+    --space-4: 32px;
+    --space-6: 48px;
+    --space-8: 64px;
+    --space-12: 96px;
+    --space-16: 128px;
+
+    /* Color Palette */
+    --navy-950: #020B18;
+    --navy-900: #0A192F;
+    --navy-800: #0D2140;
+    --navy-700: #112A52;
+    --navy-600: #163564;
+
+    --crimson-600: #B71C1C;
+    --crimson-500: #C62828;
+    --crimson-400: #E31B23;
+    --crimson-300: #EF5350;
+
+    --gold-500: #F5A623;
+    --gold-400: #FFB74D;
+    --gold-300: #FFD54F;
+
+    --slate-50: #F8FAFC;
+    --slate-100: #F1F5F9;
+    --slate-200: #E2E8F0;
+    --slate-400: #94A3B8;
+    --slate-500: #64748B;
+    --slate-600: #475569;
+    --slate-700: #334155;
+
+    /* Typography */
+    --font-heading: var(--font-outfit);
+    --font-body: var(--font-plus-jakarta);
+
+    /* Radius */
+    --radius-sm: 6px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 24px;
+    --radius-full: 9999px;
+
+    /* Transitions */
+    --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* Glassmorphism */
+    --glass-bg: rgba(10, 25, 47, 0.6);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --glass-backdrop: blur(16px) saturate(180%);
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    font-size: 16px;
+  }
+
+  body {
+    background-color: var(--navy-950);
+    color: var(--slate-100);
+    font-family: var(--font-body), system-ui, sans-serif;
+    line-height: 1.6;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading), sans-serif;
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+    color: var(--slate-50);
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  button {
+    cursor: pointer;
+    font-family: inherit;
+  }
+
+  input, textarea, select {
+    font-family: inherit;
+  }
+
+  /* Fix for select dropdown options having white background on Windows/Chrome */
+  select option {
+    background-color: var(--navy-900);
+    color: var(--slate-100);
+  }
+
+  /* Focus ring — accessible and elegant */
+  :focus-visible {
+    outline: 2px solid var(--crimson-400);
+    outline-offset: 3px;
+    border-radius: var(--radius-sm);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  /* ====== GLASSMORPHISM CARD ====== */
+  .glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-backdrop);
+    -webkit-backdrop-filter: var(--glass-backdrop);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+  }
+
+  .glass-card-hover {
+    transition: border-color var(--transition-base), transform var(--transition-base), box-shadow var(--transition-base);
+  }
+
+  .glass-card-hover:hover {
+    border-color: rgba(227, 27, 35, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.4);
+  }
+
+  /* ====== GRADIENT TEXT ====== */
+  .gradient-text {
+    background: linear-gradient(135deg, var(--crimson-400) 0%, var(--gold-400) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .gradient-text-white {
+    background: linear-gradient(135deg, #FFFFFF 0%, rgba(255,255,255,0.7) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* ====== SECTION CONTAINER ====== */
+  .section-container {
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  @media (min-width: 768px) {
+    .section-container {
+      padding: 0 32px;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .section-container {
+      padding: 0 48px;
+    }
+  }
+
+  /* ====== DIVIDER LINE ====== */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--glass-border), transparent);
+    margin: 0;
+  }
+
+  /* ====== BADGE ====== */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px;
+    border-radius: var(--radius-full);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .badge-crimson {
+    background: rgba(227, 27, 35, 0.15);
+    color: var(--crimson-300);
+    border: 1px solid rgba(227, 27, 35, 0.25);
+  }
+
+  .badge-gold {
+    background: rgba(245, 166, 35, 0.15);
+    color: var(--gold-400);
+    border: 1px solid rgba(245, 166, 35, 0.25);
+  }
+
+  .badge-navy {
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--slate-400);
+    border: 1px solid var(--glass-border);
+  }
+
+  /* ====== NOISE TEXTURE OVERLAY ====== */
+  .noise-overlay {
+    position: relative;
+  }
+
+  .noise-overlay::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 200px 200px;
+    pointer-events: none;
+    z-index: 0;
+    border-radius: inherit;
+  }
+
+  /* ====== ANIMATED GRADIENT BG ====== */
+  .animated-gradient-bg {
+    background: radial-gradient(ellipse at 20% 50%, rgba(227, 27, 35, 0.08) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 30%, rgba(22, 53, 100, 0.6) 0%, transparent 60%),
+                radial-gradient(ellipse at 50% 80%, rgba(10, 25, 47, 0.9) 0%, transparent 70%),
+                var(--navy-950);
+  }
+
+  /* ====== GRID PATTERN ====== */
+  .grid-pattern {
+    background-image:
+      linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+    background-size: 64px 64px;
+  }
+
+  /* ====== FORM FIELD ====== */
+  .form-field {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    padding: 12px 16px;
+    color: var(--slate-50);
+    font-size: 0.9375rem;
+    transition: border-color var(--transition-fast), background var(--transition-fast);
+  }
+
+  .form-field::placeholder {
+    color: var(--slate-500);
+  }
+
+  .form-field:focus {
+    outline: none;
+    border-color: var(--crimson-400);
+    background: rgba(255, 255, 255, 0.06);
+  }
+
+  .form-field-error {
+    border-color: var(--crimson-400) !important;
+    background: rgba(227, 27, 35, 0.04) !important;
+  }
+
+  .form-label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--slate-400);
+    margin-bottom: 6px;
+    letter-spacing: 0.01em;
+  }
+
+  .form-error {
+    font-size: 0.8125rem;
+    color: var(--crimson-300);
+    margin-top: 4px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  /* ====== SCROLLBAR ====== */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--navy-900);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--navy-600);
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--crimson-500);
+  }
+
+  /* ====== SELECTION ====== */
+  ::selection {
+    background: rgba(227, 27, 35, 0.3);
+    color: white;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .animate-shimmer {
+    animation: shimmer 2s infinite;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent);
+    background-size: 200% 100%;
+  }
+
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+
+  .animate-pulse-slow {
+    animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
+  }
+
+  .animate-float {
+    animation: float 4s ease-in-out infinite;
+  }
+
+  /* Hide scrollbar visually but keep functional */
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 }
