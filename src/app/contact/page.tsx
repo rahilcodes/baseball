@@ -27,7 +27,7 @@ export default function ContactPage() {
               </h1>
               <p className="text-base sm:text-lg leading-relaxed mb-10" style={{ color: "var(--slate-400)" }}>
                 Questions about registration, sponsorship, the rules, or anything else?
-                Reach out directly to Commissioner Basit or Deputy Commissioner Syed.
+                Reach out directly to Commissioner Basit or Deputy Commissioner Shinji.
               </p>
 
               <div className="space-y-5">
@@ -40,9 +40,9 @@ export default function ContactPage() {
                   },
                   {
                     icon: Phone,
-                    label: "Deputy Commissioner Syed",
+                    label: `Deputy Commissioner ${LEAGUE_INFO.deputyCommissioner.name.split(" ")[0]}`,
                     value: `${LEAGUE_INFO.deputyCommissioner.phone}`,
-                    href: `tel:+60193822176`,
+                    href: `tel:+60${LEAGUE_INFO.deputyCommissioner.phone.replace(/[-\s]/g, "")}`,
                   },
                   {
                     icon: Mail,

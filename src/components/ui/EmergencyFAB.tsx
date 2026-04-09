@@ -121,7 +121,7 @@ export function EmergencyFAB() {
             className="px-4 py-2 text-xs text-center"
             style={{ color: "var(--slate-600)", borderTop: "1px solid rgba(255,255,255,0.04)" }}
           >
-            BPL Safety Protocol · First aid kit with Syed
+            BPL Safety Protocol · First aid kit with Shinji
           </div>
         </div>
       </div>

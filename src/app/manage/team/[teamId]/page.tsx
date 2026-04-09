@@ -33,9 +33,9 @@ export default async function ManageTeamPage(props: { params: Promise<{ teamId: 
     .order("created_at", { ascending: true });
 
   const rosterCount = players?.length || 0;
-  const minPlayers = 12;
+  const minPlayers = 9;
   const progressPercent = Math.min((rosterCount / minPlayers) * 100, 100);
-  const totalFees = rosterCount * 20;
+  const totalFees = players?.reduce((acc, player) => acc + (player.registrant_type === "student" ? 20 : 40), 0) || 0;
 
   return (
     <div className="pt-32 pb-24">
@@ -88,7 +88,7 @@ export default async function ManageTeamPage(props: { params: Promise<{ teamId: 
             </div>
             <p className="text-sm text-slate-400 mb-1">Total based on {rosterCount} players.</p>
             <p className="text-xs text-slate-500 leading-tight">
-              Collect RM 20 from each player. Bulk submission due by May 1st.
+              Student: RM 20 | Adult: RM 40. Bulk submission due prior to Draft Day.
             </p>
           </div>
 

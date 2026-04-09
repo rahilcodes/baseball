@@ -3,19 +3,19 @@ import { Calendar, MapPin, Clock } from "lucide-react";
 const TIMELINE = [
   {
     phase: "Registration",
-    date: "Now — Apr 30, 2026",
-    description: "Open registration for teams and free agents. Assessment session for free agents on April 19/20.",
+    date: "Now — Apr 24, 2026",
+    description: "Open registration for teams and free agents. Free Agent Tryouts on Saturday, April 25 at 10 AM at UPM.",
     status: "now",
   },
   {
-    phase: "Draft Day",
-    date: "Apr 24, 2026",
-    description: "Free agents evaluated and placed onto teams via the BPL serpentine draft for competitive balance.",
+    phase: "Draft Day & Free Agent Tryouts",
+    date: "Apr 25, 2026 · 10 AM",
+    description: "Free agents evaluated and placed onto teams via the BPL serpentine draft for competitive balance. All unattached players must attend.",
     status: "upcoming",
   },
   {
     phase: "Season Opener",
-    date: "May 4, 2026",
+    date: "May 3, 2026",
     description: "First pitch. 2–3 games every Sunday at Universiti Putra Malaysia (UPM), Selangor.",
     status: "upcoming",
   },

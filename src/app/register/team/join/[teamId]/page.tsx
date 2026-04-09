@@ -34,7 +34,7 @@ export default async function JoinTeamPage(props: { params: Promise<{ teamId: st
     .eq("team_id", teamId);
 
   const currentRosterCount = count || 0;
-  const isFull = currentRosterCount >= 20;
+  const isFull = currentRosterCount >= 30;
 
   // 2. AUTO-EXPIRATION LOGIC (Example: May 1, 2026 cut-off)
   const isExpired = new Date() > new Date("2026-05-01T00:00:00Z");

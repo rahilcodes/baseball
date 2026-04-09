@@ -27,10 +27,11 @@ export function PlayerJoinForm({ teamId }: { teamId: string }) {
   const [step, setStep] = useState(1);
   const [submitted, setSubmitted] = useState(false);
   const [verifiedEmail, setVerifiedEmail] = useState<string | null>(null);
+  const [isMinor, setIsMinor] = useState(false);
 
   // We split the fields into logical pages, but keep the schema flat
   const STEPS = [
-    { id: 1, title: "Player Details", icon: User, fields: ["fullName", "phone", "email", "emergencyContactName", "emergencyContactPhone", "primaryPosition", "jerseySize"] },
+    { id: 1, title: "Player Details", icon: User, fields: ["fullName", "phone", "email", "dateOfBirth", "registrantType", "emergencyContactName", "emergencyContactPhone", "primaryPosition", "jerseySize"] },
     { id: 2, title: "Liability Waiver", icon: ShieldCheck, fields: ["waiverAgreed", "physicallyFit", "codeOfConductAgreed"] },
   ];
 
@@ -52,6 +53,14 @@ export function PlayerJoinForm({ teamId }: { teamId: string }) {
     }
   }, [verifiedEmail, setValue]);
 
+  const handleDobChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const dob = new Date(e.target.value);
+    const today = new Date();
+    const age = today.getFullYear() - dob.getFullYear() -
+      (today < new Date(today.getFullYear(), dob.getMonth(), dob.getDate()) ? 1 : 0);
+    setIsMinor(age >= 16 && age < 18);
+  };
+
   const currentStep = STEPS[step - 1];
 
   const handleNext = async () => {
@@ -68,6 +77,10 @@ export function PlayerJoinForm({ teamId }: { teamId: string }) {
           full_name: data.fullName,
           phone: data.phone,
           email: data.email,
+          date_of_birth: data.dateOfBirth,
+          registrant_type: data.registrantType,
+          guardian_name: data.guardianName || null,
+          guardian_phone: data.guardianPhone || null,
           emergency_contact_name: data.emergencyContactName,
           emergency_contact_phone: data.emergencyContactPhone,
           primary_position: data.primaryPosition,
@@ -110,7 +123,13 @@ export function PlayerJoinForm({ teamId }: { teamId: string }) {
           Your manager will receive a notification that you have completed your registration and signed the liability waiver.
         </p>
         <div className="glass-card p-4 text-sm" style={{ border: "1px solid rgba(245,166,35,0.2)", background: "rgba(245,166,35,0.03)", color: "var(--slate-400)" }}>
-          <p>Important: Registration fee is <strong style={{ color: "var(--gold-400)" }}>RM 20</strong> per player. Please hand your fee directly to your Team Manager before opening day.</p>
+          <p>
+            Important: Your registration fee is{" "}
+            <strong style={{ color: "var(--gold-400)" }}>
+              {getValues("registrantType") === "student" ? "RM 20 (Student)" : "RM 40 (Adult)"}
+            </strong>
+            . Please hand your fee directly to your Team Manager before opening day.
+          </p>
         </div>
       </div>
     );
@@ -193,6 +212,52 @@ export function PlayerJoinForm({ teamId }: { teamId: string }) {
               />
               <FieldError message={errors.email?.message} />
             </div>
+            <div>
+              <label className="form-label" htmlFor="dateOfBirth">Date of Birth * (16+ Only)</label>
+              <input id="dateOfBirth" type="date" className={cn("form-field", errors.dateOfBirth && "form-field-error")} {...register("dateOfBirth", { onChange: handleDobChange })} />
+              <FieldError message={errors.dateOfBirth?.message} />
+            </div>
+
+            {/* Fee Tier Selector */}
+            <div className="sm:col-span-2">
+              <label className="form-label" htmlFor="registrantType">Registration Category *</label>
+              <div className="grid grid-cols-2 gap-3 mt-1">
+                <label className="cursor-pointer">
+                  <input type="radio" value="student" {...register("registrantType")} className="sr-only" />
+                  <div className={cn("glass-card p-4 text-center border-2 transition-all", "border-white/10 hover:border-crimson-400")} style={{ borderColor: undefined }}>
+                    <p className="font-heading font-bold text-lg" style={{ color: "var(--gold-400)" }}>RM 20</p>
+                    <p className="text-xs mt-1" style={{ color: "var(--slate-400)" }}>Student / College</p>
+                  </div>
+                </label>
+                <label className="cursor-pointer">
+                  <input type="radio" value="adult" {...register("registrantType")} className="sr-only" />
+                  <div className={cn("glass-card p-4 text-center border-2 transition-all", "border-white/10 hover:border-crimson-400")} style={{ borderColor: undefined }}>
+                    <p className="font-heading font-bold text-lg" style={{ color: "var(--crimson-400)" }}>RM 40</p>
+                    <p className="text-xs mt-1" style={{ color: "var(--slate-400)" }}>Working Adult</p>
+                  </div>
+                </label>
+              </div>
+              <FieldError message={(errors as any).registrantType?.message} />
+            </div>
+
+            {/* 16-17 Guardian Section */}
+            {isMinor && (
+              <div className="sm:col-span-2 rounded-xl p-4 border" style={{ background: "rgba(245,166,35,0.05)", borderColor: "rgba(245,166,35,0.25)" }}>
+                <p className="font-semibold text-sm mb-3" style={{ color: "var(--gold-400)" }}>⚠️ Under-18 Player — Parent/Guardian Signature Required</p>
+                <p className="text-xs mb-4" style={{ color: "var(--slate-400)" }}>League rule §1.10: Players aged 16–17 must have a parent/guardian co-sign the liability waiver. Please provide their details.</p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="form-label" htmlFor="guardianName">Guardian Full Name *</label>
+                    <input id="guardianName" className="form-field" {...register("guardianName")} placeholder="Parent / Legal Guardian" />
+                  </div>
+                  <div>
+                    <label className="form-label" htmlFor="guardianPhone">Guardian Phone *</label>
+                    <input id="guardianPhone" type="tel" className="form-field" {...register("guardianPhone")} placeholder="e.g. 012-345 6789" />
+                  </div>
+                </div>
+              </div>
+            )}
+
             <div className="sm:col-span-2 border-t border-white/5 pt-4 mt-2">
               <p className="font-semibold text-white/90 mb-4">Emergency Contact & Baseball Info</p>
             </div>

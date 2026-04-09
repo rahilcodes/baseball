@@ -14,7 +14,7 @@ const EMERGENCY_CONTACTS = [
   { name: "KPJ Kajang Specialist", number: "03-8769 2999", detail: "Private hospital. 12 min drive. Faster triage." },
   { name: "Poison Control (MY)", number: "03-2615 5555", detail: "National Poison Centre (USM)" },
   { name: "Commissioner Basit", number: "10-227 6014", detail: "League emergency contact" },
-  { name: "Deputy Commissioner Syed", number: "19 382 2176", detail: "Field operations & first aid kit" },
+  { name: "Deputy Commissioner Shinji Konishi", number: "11-2790 4034", detail: "Field operations & first aid kit" },
 ];
 
 const SCENARIOS = [

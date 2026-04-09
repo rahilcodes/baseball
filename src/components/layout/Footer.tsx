@@ -42,24 +42,15 @@ export function Footer() {
           <div className="lg:col-span-1">
             <Link href="/" className="flex items-center gap-3 mb-5" aria-label="BPL Home">
               <Image
-                src="/images/logo.png"
+                src="/images/bpl_logo_with word.png"
                 alt="BPL Baseball Malaysia"
-                width={48}
-                height={48}
-                className="object-contain"
+                width={160}
+                height={50}
+                className="object-contain mb-4"
               />
-              <div>
-                <p
-                  className="font-heading font-bold text-base leading-tight"
-                  style={{ color: "var(--slate-50)" }}
-                >
-                  Baseball<br />
-                  <span style={{ color: "var(--crimson-400)" }}>Premier League</span>
-                </p>
-              </div>
             </Link>
             <p className="text-sm leading-relaxed mb-6" style={{ color: "var(--slate-500)" }}>
-              Malaysia&apos;s first structured adult baseball league. Season 1 — May–July 2026, Selangor.
+              Inaugural Season for Malaysia&apos;s first adult baseball league.
             </p>
             <div className="space-y-2">
               <div className="flex items-start gap-2 text-sm" style={{ color: "var(--slate-500)" }}>
@@ -67,12 +58,12 @@ export function Footer() {
                 <span>Universiti Putra Malaysia (UPM), Selangor</span>
               </div>
               <a
-                href={`tel:+60${LEAGUE_INFO.commissioner.phone.replace(/-/g, "")}`}
+                href="tel:+601022763014"
                 className="flex items-center gap-2 text-sm transition-colors hover:text-white"
                 style={{ color: "var(--slate-500)" }}
               >
                 <Phone size={14} style={{ color: "var(--crimson-400)" }} />
-                Commissioner: {LEAGUE_INFO.commissioner.name} — {LEAGUE_INFO.commissioner.phone}
+                +60 10-227 6014
               </a>
               <a
                 href="mailto:info@bplbaseball.com"

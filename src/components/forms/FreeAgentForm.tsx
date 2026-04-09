@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils";
 import { OTPVerifier } from "./OTPVerifier";
 
 const STEPS = [
-  { id: 1, title: "Personal Info", icon: User, fields: ["fullName", "dateOfBirth", "nationality", "phone", "email", "emergencyContactName", "emergencyContactPhone", "medicalConditions", "jerseySize"] },
+  { id: 1, title: "Personal Info", icon: User, fields: ["fullName", "dateOfBirth", "registrantType", "nationality", "phone", "email", "emergencyContactName", "emergencyContactPhone", "medicalConditions", "jerseySize"] },
   { id: 2, title: "Baseball Profile", icon: Target, fields: ["primaryPosition", "secondaryPosition", "experienceLevel", "yearsPlaying"] },
   { id: 3, title: "Compliance & Waiver", icon: ShieldCheck, fields: ["waiverAgreed", "physicallyFit", "codeOfConductAgreed"] },
 ];
@@ -33,6 +33,7 @@ export function FreeAgentForm() {
   const [step, setStep] = useState(1);
   const [submitted, setSubmitted] = useState(false);
   const [verifiedEmail, setVerifiedEmail] = useState<string | null>(null);
+  const [isMinor, setIsMinor] = useState(false);
 
   const {
     register,
@@ -53,6 +54,14 @@ export function FreeAgentForm() {
     }
   }, [verifiedEmail, setValue]);
 
+  const handleDobChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const dob = new Date(e.target.value);
+    const today = new Date();
+    const age = today.getFullYear() - dob.getFullYear() -
+      (today < new Date(today.getFullYear(), dob.getMonth(), dob.getDate()) ? 1 : 0);
+    setIsMinor(age >= 16 && age < 18);
+  };
+
   const currentStep = STEPS[step - 1];
 
   const handleNext = async () => {
@@ -67,6 +76,9 @@ export function FreeAgentForm() {
         {
           full_name: data.fullName,
           date_of_birth: data.dateOfBirth,
+          registrant_type: data.registrantType,
+          guardian_name: data.guardianName || null,
+          guardian_phone: data.guardianPhone || null,
           nationality: data.nationality,
           phone: data.phone,
           email: data.email,
@@ -113,7 +125,11 @@ export function FreeAgentForm() {
           Commissioner Basit will contact you on WhatsApp with details.
         </p>
         <div className="glass-card p-4 text-sm" style={{ color: "var(--slate-400)" }}>
-          <p>Registration fee: <strong style={{ color: "var(--slate-200)" }}>RM 20</strong> — pay on assessment day.</p>
+          <p>
+            Registration fee: <strong style={{ color: "var(--slate-200)" }}>
+              {getValues("registrantType") === "student" ? "RM 20 (Student)" : "RM 40 (Adult)"}
+            </strong> — pay on assessment day.
+          </p>
         </div>
       </div>
     );
@@ -203,10 +219,51 @@ export function FreeAgentForm() {
               <FieldError message={errors.fullName?.message} />
             </div>
             <div>
-              <label className="form-label" htmlFor="dateOfBirth">Date of Birth *</label>
-              <input id="dateOfBirth" type="date" className={cn("form-field", errors.dateOfBirth && "form-field-error")} {...register("dateOfBirth")} autoComplete="bday" />
+              <label className="form-label" htmlFor="dateOfBirth">Date of Birth * (16+ Only)</label>
+              <input id="dateOfBirth" type="date" className={cn("form-field", errors.dateOfBirth && "form-field-error")} {...register("dateOfBirth", { onChange: handleDobChange })} autoComplete="bday" />
               <FieldError message={errors.dateOfBirth?.message} />
             </div>
+
+            {/* Fee Tier Selector */}
+            <div className="sm:col-span-2 mt-2">
+              <label className="form-label" htmlFor="registrantType">Registration Category *</label>
+              <div className="grid grid-cols-2 gap-3 mt-1">
+                <label className="cursor-pointer">
+                  <input type="radio" value="student" {...register("registrantType")} className="sr-only" />
+                  <div className={cn("glass-card p-4 text-center border-2 transition-all", "border-white/10 hover:border-crimson-400")} style={{ borderColor: undefined }}>
+                    <p className="font-heading font-bold text-lg" style={{ color: "var(--gold-400)" }}>RM 20</p>
+                    <p className="text-xs mt-1" style={{ color: "var(--slate-400)" }}>Student / College</p>
+                  </div>
+                </label>
+                <label className="cursor-pointer">
+                  <input type="radio" value="adult" {...register("registrantType")} className="sr-only" />
+                  <div className={cn("glass-card p-4 text-center border-2 transition-all", "border-white/10 hover:border-crimson-400")} style={{ borderColor: undefined }}>
+                    <p className="font-heading font-bold text-lg" style={{ color: "var(--crimson-400)" }}>RM 40</p>
+                    <p className="text-xs mt-1" style={{ color: "var(--slate-400)" }}>Working Adult</p>
+                  </div>
+                </label>
+              </div>
+              <FieldError message={(errors as any).registrantType?.message} />
+            </div>
+
+            {/* 16-17 Guardian Section */}
+            {isMinor && (
+              <div className="sm:col-span-2 rounded-xl p-4 border" style={{ background: "rgba(245,166,35,0.05)", borderColor: "rgba(245,166,35,0.25)" }}>
+                <p className="font-semibold text-sm mb-3" style={{ color: "var(--gold-400)" }}>⚠️ Under-18 Player — Parent/Guardian Signature Required</p>
+                <p className="text-xs mb-4" style={{ color: "var(--slate-400)" }}>League rule §1.10: Players aged 16–17 must have a parent/guardian co-sign the liability waiver. Please provide their details.</p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="form-label" htmlFor="guardianName">Guardian Full Name *</label>
+                    <input id="guardianName" className="form-field" {...register("guardianName")} placeholder="Parent / Legal Guardian" />
+                  </div>
+                  <div>
+                    <label className="form-label" htmlFor="guardianPhone">Guardian Phone *</label>
+                    <input id="guardianPhone" type="tel" className="form-field" {...register("guardianPhone")} placeholder="e.g. 012-345 6789" />
+                  </div>
+                </div>
+              </div>
+            )}
+
             <div>
               <label className="form-label" htmlFor="nationality">Nationality *</label>
               <select id="nationality" className={cn("form-field", errors.nationality && "form-field-error")} {...register("nationality")}>

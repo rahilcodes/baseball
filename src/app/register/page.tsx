@@ -24,8 +24,7 @@ export default function RegisterPage() {
               <span className="gradient-text">Season 1</span>
             </h1>
             <p className="text-lg sm:text-xl leading-relaxed" style={{ color: "var(--slate-400)" }}>
-              Two registration tracks. Both cost RM 20 per player.
-              Both lead to competitive baseball. Choose yours below.
+              Two registration paths. Both lead to competitive baseball. Choose yours below.
             </p>
           </div>
 
@@ -43,12 +42,11 @@ export default function RegisterPage() {
               >
                 <Users size={36} style={{ color: "var(--gold-400)" }} aria-hidden="true" />
               </div>
-              <div className="badge badge-gold mb-4">Track A</div>
               <h2 className="font-heading font-bold text-2xl sm:text-3xl mb-3" style={{ color: "var(--slate-50)" }}>
                 Register a Team
               </h2>
               <p className="text-base leading-relaxed mb-6" style={{ color: "var(--slate-400)" }}>
-                Form your roster of 12–20 players, submit your team details, and compete as a 
+                Form your roster of 9–30 players, submit your team details, and compete as a 
                 fully registered BPL team from Day 1.
               </p>
               <div
@@ -73,12 +71,11 @@ export default function RegisterPage() {
               >
                 <UserPlus size={36} style={{ color: "var(--crimson-400)" }} aria-hidden="true" />
               </div>
-              <div className="badge badge-crimson mb-4">Track B</div>
               <h2 className="font-heading font-bold text-2xl sm:text-3xl mb-3" style={{ color: "var(--slate-50)" }}>
                 Free Agent
               </h2>
               <p className="text-base leading-relaxed mb-6" style={{ color: "var(--slate-400)" }}>
-                No team? No problem. Register, get evaluated at the April 19/20 assessment, 
+                No team? No problem. Register, get evaluated at the April 25 Tryouts, 
                 and get placed via the BPL Draft for competitive balance.
               </p>
               <div
@@ -97,7 +94,7 @@ export default function RegisterPage() {
               Registration Fee
             </p>
             <p className="text-sm leading-relaxed" style={{ color: "var(--slate-400)" }}>
-              RM 20 per player for both tracks. Team managers collect and submit fees in bulk.
+              Registration fee is Student: RM 20 / Adult: RM 40. Team managers collect and submit fees in bulk.
               Free agents pay directly. Questions?{" "}
               <a
                 href="https://wa.me/601022763014"

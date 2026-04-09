@@ -76,14 +76,14 @@ export function HeroSection() {
         {/* CTAs */}
         <div className="flex flex-col sm:flex-row items-center gap-4 mb-16">
           <Button variant="primary" size="xl" asChild>
-            <Link href="/register" className="group">
-              Register Now
+            <Link href="/register/team" className="group">
+              Register a Team
               <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" aria-hidden="true" />
             </Link>
           </Button>
           <Button variant="outline" size="xl" asChild>
-            <Link href="/about">
-              Learn More
+            <Link href="/register/free-agent">
+              Free Agent
             </Link>
           </Button>
         </div>

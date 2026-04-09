@@ -13,11 +13,12 @@ export const LEAGUE_INFO = {
   shortName: "BPL",
   season: "Season 1",
   year: 2026,
-  startDate: "2026-05-04",
+  startDate: "2026-05-03",
   endDate: "2026-07-31",
+  draftDate: "2026-04-25",
   venue: "Universiti Putra Malaysia (UPM), Selangor",
   commissioner: { name: "Basit", phone: "10-227 6014" },
-  deputyCommissioner: { name: "Syed", phone: "19 382 2176" },
+  deputyCommissioner: { name: "Shinji Konishi", phone: "11-2790 4034" },
   website: "www.bplbaseball.com",
 };
 
@@ -33,20 +34,25 @@ export const MOCK_TEAMS: Team[] = [
 
 // --- Rules Engine ---
 export const LEAGUE_RULES: Rule[] = [
-  { section: "1.1", title: "Game Format", content: "Each game consists of 7 innings. A 2-hour time limit applies — no new inning may begin after 1 hour 50 minutes from first pitch.", tags: ["format", "innings", "time limit"] },
-  { section: "1.1", title: "Mercy Rule", content: "A game ends when one team leads by 10 or more runs after 5 complete innings (4.5 if home team leads).", tags: ["mercy rule", "run rule", "game end"] },
-  { section: "1.1", title: "Playoff Tiebreaker", content: "Regular season ties are recorded as a tie. Playoff games use extra innings with a runner on 2nd base from the 8th inning onwards (WBSC tiebreaker rule).", tags: ["playoffs", "tiebreaker", "extra innings"] },
-  { section: "1.2", title: "Team Composition", content: "Each team must field a minimum of 9 players. A team may play with 8 players; the 9th spot is an automatic out. Forfeit if fewer than 8 players within 15 minutes of game time.", tags: ["roster", "players", "forfeit", "minimum"] },
+  { section: "1.1", title: "Game Format", content: "All regular season games consist of 7 innings. There is no time limit — each game plays to 7 complete innings. No new inning may begin after both teams agree, but time is not grounds for ending a game.", tags: ["format", "innings", "time limit"] },
+  { section: "1.1", title: "8-Run Inning Rule", content: "If a team scores 8 or more runs in a single half-inning, that half-inning is immediately over and the opposing team takes their turn to bat. This applies in all regular season and playoff games.", tags: ["format", "innings", "mercy rule", "run rule"] },
+  { section: "1.1", title: "Mercy Rule (Game)", content: "A game ends when one team leads by 10 or more runs after 5 complete innings (4.5 if home team leads).", tags: ["mercy rule", "run rule", "game end"] },
+  { section: "1.1", title: "Playoff Format", content: "Playoff games are 7 innings with no time limit. All playoff innings play to completion. Extra-inning playoff games use a runner on 2nd base from the 8th inning onwards (WBSC tiebreaker rule).", tags: ["playoffs", "playoff", "tiebreaker", "extra innings", "format"] },
+  { section: "1.2", title: "Team Composition", content: "Each team must field a minimum of 9 players and a maximum of 30 registered players per season roster. A team may play with 8 players; the 9th spot is an automatic out. Forfeit if fewer than 8 players within 15 minutes of game time.", tags: ["roster", "players", "forfeit", "minimum"] },
   { section: "1.3", title: "Designated Hitter (DH)", content: "The DH rule is in effect for all BPL games. The DH bats in place of the pitcher. Once removed, the pitcher must bat. Teams may opt out by declaring before the game.", tags: ["DH", "designated hitter", "pitching", "batting"] },
   { section: "1.4", title: "Substitutions", content: "Free defensive substitution is allowed. A substituted player may NOT re-enter the game. Courtesy runners are allowed for pitcher and catcher anytime.", tags: ["substitution", "courtesy runner", "re-entry"] },
-  { section: "1.5", title: "Pitching Rules", content: "No pitch count limit in Season 1. A pitcher who hits 3 batters in a single game must be removed. Balks called per WBSC Rule 11.", tags: ["pitching", "pitch count", "balk", "hit by pitch"] },
+  { section: "1.5", title: "Pitching Rules — General", content: "A pitcher who hits 3 batters in a single game must be removed. Balks called per WBSC Rule 11. Once removed from pitching, a player may not return to pitch in the same game.", tags: ["pitching", "pitch count", "balk", "hit by pitch"] },
+  { section: "1.5", title: "Pitching — Age 16–17 Restriction", content: "Players aged 16 or 17 are limited to a maximum of 90 pitches per game. After reaching 90 pitches, they must rest for a mandatory 4 days before pitching again. This rule protects developing arm health and is strictly enforced.", tags: ["pitching", "pitch count", "youth", "16-17", "safety"] },
   { section: "1.6", title: "Equipment Standards", content: "Approved baseballs: 9-inch leather, 5-5.25 oz. Bats: wood, aluminium, or composite — no altered bats. Pitcher gloves must not be white or grey. Full catcher gear mandatory.", tags: ["equipment", "bats", "gloves", "helmet", "catcher"] },
   { section: "1.7", title: "Field Dimensions", content: "Base paths: 90 feet (27.43m). Pitcher rubber to home plate: 60 feet 6 inches (18.43m). Home plate to backstop: minimum 25 feet.", tags: ["dimensions", "field", "bases"] },
   { section: "1.8", title: "Umpire Authority", content: "The umpire has full authority per WBSC Rule 4.1. Only the team manager may dispute a ruling, respectfully. Aggressive disputes result in ejection.", tags: ["umpire", "authority", "dispute", "ejection"] },
   { section: "1.9", title: "Forfeits", content: "A team forfeits if it cannot field 8 players within 15 minutes, refuses to play, or deliberately delays. Forfeit score: 7-0 in favour of the opponent.", tags: ["forfeit", "delay", "score"] },
+  { section: "1.10", title: "Age Eligibility — 16+ Rule", content: "The BPL is open to players aged 16 and above. Players aged 16–17 must have a parent or legal guardian sign the liability waiver on their behalf in addition to the player's own signature. Players under 16 are not permitted to participate.", tags: ["players", "youth", "16-17", "guardian", "waiver", "safety"] },
+  { section: "1.11", title: "Defensive Substitution — Re-entry", content: "A player removed from the game for at least 1 inning may be allowed to re-enter at the discretion of the umpire, subject to the standard WBSC re-entry rules. A player removed and immediately replaced with no inning elapsed may NOT re-enter.", tags: ["substitution", "re-entry", "innings", "format"] },
   { section: "2", title: "Azan (Call to Prayer) Protocol", content: "The game must stop when the Azan (Call to Prayer) is taking place and continue after it is completed. All players and officials must respect this pause.", tags: ["azan", "prayer", "cultural", "pause"] },
-  { section: "2.1", title: "Player Conduct", content: "No fighting, equipment throwing, verbal abuse, profanity, or discriminatory language. No alcohol or drugs before or during games. Full team uniform required.", tags: ["conduct", "fighting", "alcohol", "uniform", "sportsmanship"] },
-  { section: "2.5", title: "Disciplinary Actions", content: "Fighting/physical contact: Ejection + 2 games, then season ban. Discriminatory language: Ejection + 2 games, then season ban. Umpire physical contact: Season ban, then Lifetime ban.", tags: ["discipline", "ejection", "suspension", "ban"] },
+  { section: "2.1", title: "Player Conduct", content: "No fighting, equipment throwing, verbal abuse, profanity, or discriminatory language. No alcohol or drugs before or during games. Full team uniform required. Home and away uniform colors must be worn as designated so teams can identify home vs. away status for each game.", tags: ["conduct", "fighting", "alcohol", "uniform", "sportsmanship"] },
+  { section: "2.5", title: "Disciplinary Actions — Physical Contact", content: "Any player involved in physical contact or fighting will face escalating discipline: First offence — Ejection + 2-game suspension. Second offence — Season ban. Third offence / Umpire physical contact — Lifetime ban from all BPL events.", tags: ["discipline", "fighting", "ejection", "suspension", "ban", "conduct"] },
+  { section: "2.5", title: "Disciplinary Actions — Other Misconduct", content: "Discriminatory language or slurs: Ejection + 2-game suspension. Repeated misconduct: Season ban at Commissioner's discretion. All disciplinary decisions are final and made by the Commissioner.", tags: ["discipline", "ejection", "suspension", "ban", "conduct"] },
   { section: "3.4", title: "Weather Protocols", content: "Lightning: Stop play immediately. Move to enclosed vehicles or permanent structures. Resume only 30 minutes after last lightning/thunder. Heavy Rain: Game valid after 5 innings. Extreme Heat (37C+): Mandatory water breaks every 2 innings.", tags: ["weather", "lightning", "rain", "heat", "safety"] },
 ];
 
@@ -55,7 +61,7 @@ export const SPONSOR_PACKAGES: SponsorPackage[] = [
   {
     tier: "title",
     name: "Title Sponsor",
-    priceRange: "RM 8,000 - 15,000",
+    priceRange: "RM 15,000",
     slots: 1,
     slotsAvailable: 1,
     highlights: [
@@ -75,7 +81,7 @@ export const SPONSOR_PACKAGES: SponsorPackage[] = [
   {
     tier: "gold",
     name: "Gold Sponsor",
-    priceRange: "RM 3,000 - 5,000",
+    priceRange: "RM 5,000",
     slots: 3,
     slotsAvailable: 3,
     highlights: [
@@ -93,7 +99,7 @@ export const SPONSOR_PACKAGES: SponsorPackage[] = [
   {
     tier: "silver",
     name: "Silver Sponsor",
-    priceRange: "RM 1,000 - 2,000",
+    priceRange: "RM 2,000",
     slots: 5,
     slotsAvailable: 5,
     highlights: [

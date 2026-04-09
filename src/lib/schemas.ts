@@ -12,6 +12,13 @@ export const freeAgentSchema = z.object({
   medicalConditions: z.string().optional(),
   jerseySize: z.enum(["S", "M", "L", "XL", "XXL"]).refine((v) => v !== undefined, "Please select a jersey size"),
 
+  // Registrant Category (determines fee)
+  registrantType: z.enum(["student", "adult"]),
+
+  // Under-17 Guardian (required if player is 16 or 17)
+  guardianName: z.string().optional(),
+  guardianPhone: z.string().optional(),
+
   // Step 2: Baseball
   primaryPosition: z.enum(["P", "C", "1B", "2B", "SS", "3B", "LF", "CF", "RF", "DH"]).refine((v) => v !== undefined, "Select a primary position"),
   secondaryPosition: z.enum(["P", "C", "1B", "2B", "SS", "3B", "LF", "CF", "RF", "DH", "N/A"]).optional(),
@@ -44,13 +51,21 @@ export const teamPlayerSchema = z.object({
   fullName: z.string().min(2, "Full name must be at least 2 characters"),
   phone: z.string().min(8, "WhatsApp number required"),
   email: z.string().email("Valid email required"),
+  dateOfBirth: z.string().min(1, "Date of birth is required"),
   emergencyContactName: z.string().min(2, "Emergency contact name required"),
   emergencyContactPhone: z.string().min(8, "Emergency contact phone required"),
-  
+
+  // Registrant Category (determines fee)
+  registrantType: z.enum(["student", "adult"]),
+
+  // Under-17 Guardian (required if player is 16 or 17)
+  guardianName: z.string().optional(),
+  guardianPhone: z.string().optional(),
+
   // Selection
   primaryPosition: z.enum(["P", "C", "1B", "2B", "SS", "3B", "LF", "CF", "RF", "DH"]).refine((v) => v !== undefined, "Select a position"),
   jerseySize: z.enum(["S", "M", "L", "XL", "XXL"]).refine((v) => v !== undefined, "Select a jersey size"),
-  
+
   // Compliance
   waiverAgreed: z.boolean().refine((v) => v === true, { message: "You must agree to the waiver" }),
   physicallyFit: z.boolean().refine((v) => v === true, { message: "You must confirm physical fitness" }),

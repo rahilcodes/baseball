@@ -64,20 +64,13 @@ export function Navbar() {
               aria-label="Baseball Premier League — Home"
             >
               <Image
-                src="/images/logo.png"
+                src="/images/bpl_logo_with word.png"
                 alt="BPL Logo"
-                width={40}
+                width={150}
                 height={40}
                 priority
                 className="object-contain"
               />
-              <span
-                className="font-heading font-bold text-[0.9rem] tracking-tight leading-tight hidden sm:block"
-                style={{ color: "var(--slate-50)" }}
-              >
-                Baseball<br />
-                <span style={{ color: "var(--crimson-400)" }}>Premier League</span>
-              </span>
             </Link>
 
             {/* Desktop nav */}
@@ -157,10 +150,7 @@ export function Navbar() {
         >
           <div className="flex items-center justify-between mb-8">
             <Link href="/" className="flex items-center gap-3">
-              <Image src="/images/logo.png" alt="BPL" width={36} height={36} className="object-contain" />
-              <span className="font-heading font-bold text-sm" style={{ color: "var(--slate-50)" }}>
-                BPL Baseball
-              </span>
+              <Image src="/images/bpl_logo_with word.png" alt="BPL" width={120} height={32} className="object-contain" />
             </Link>
             <button
               onClick={() => setIsOpen(false)}

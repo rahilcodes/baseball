@@ -3,9 +3,9 @@ import { Users, UserPlus, ArrowRight, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 
 const TEAM_FEATURES = [
-  "Minimum 12, maximum 20 players",
+  "Minimum 9, maximum 30 players",
   "Submit full roster with contact details",
-  "Registration: RM 20 per player",
+  "Registration: RM 20 (Student) / RM 40 (Adult)",
   "Choose home/away uniform colors",
   "Manager as primary league contact",
 ];
@@ -15,7 +15,7 @@ const AGENT_FEATURES = [
   "Evaluated at pre-season assessment",
   "Serpentine draft to ensure fairness",
   "Placed on a team by April 24",
-  "Registration: RM 20 (all-inclusive)",
+  "Registration: RM 20 (Student) / RM 40 (Adult)",
 ];
 
 export function RegistrationPaths() {
@@ -66,7 +66,6 @@ export function RegistrationPaths() {
             >
               <Users size={26} style={{ color: "var(--gold-400)" }} aria-hidden="true" />
             </div>
-            <div className="badge badge-gold mb-4 self-start">Track A</div>
             <h3
               className="font-heading font-bold text-2xl sm:text-3xl mb-3"
               style={{ color: "var(--slate-50)" }}
@@ -113,7 +112,6 @@ export function RegistrationPaths() {
             >
               <UserPlus size={26} style={{ color: "var(--crimson-400)" }} aria-hidden="true" />
             </div>
-            <div className="badge badge-crimson mb-4 self-start">Track B</div>
             <h3
               className="font-heading font-bold text-2xl sm:text-3xl mb-3"
               style={{ color: "var(--slate-50)" }}

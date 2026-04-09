@@ -3,12 +3,44 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Target, History, Heart } from "lucide-react";
 import { Button } from "@/components/ui/Button";
-import { LEAGUE_INFO } from "@/lib/data";
 
 export const metadata: Metadata = {
   title: "About BPL",
   description: "Learn about the Baseball Premier League — Malaysia's first structured adult baseball league. Our story, our mission, and the team behind Season 1.",
 };
+
+const LEADERSHIP = [
+  {
+    role: "Commissioner",
+    name: "Basit",
+    phone: "10-227 6014",
+    detail: "All final disciplinary decisions, emergency contact, and league operations.",
+  },
+  {
+    role: "Deputy Commissioner",
+    name: "Shinji Konishi",
+    phone: "11-2790 4034",
+    detail: "First aid kit custodian, field operations, and day-of-game coordination.",
+  },
+  {
+    role: "Operations Manager",
+    name: "Yusuf Sadahiro",
+    phone: null,
+    detail: "Manages league logistics, scheduling, and operational workflows.",
+  },
+  {
+    role: "University & Media Coordinator",
+    name: "Tomoki",
+    phone: null,
+    detail: "University partnerships, media coverage, and content production.",
+  },
+  {
+    role: "Director of Player Development & Community Outreach",
+    name: "Riley Pitts",
+    phone: null,
+    detail: "Player development programs, community initiatives, and clinics.",
+  },
+];
 
 export default function AboutPage() {
   return (
@@ -28,8 +60,8 @@ export default function AboutPage() {
               <span className="gradient-text">nobody else would.</span>
             </h1>
             <p className="text-lg sm:text-xl leading-relaxed mb-4" style={{ color: "var(--slate-400)" }}>
-              Malaysia had players. Malaysia had passion. Malaysia had communities from Japan, Korea, the United States — 
-              all of them looking for the same thing: organised, competitive adult baseball.
+              Malaysia had players from local communities and from Japan, Korea, United States, China — 
+              all of them looking for the same game.
             </p>
             <p className="text-base sm:text-lg leading-relaxed" style={{ color: "var(--slate-500)" }}>
               What it didn&apos;t have was a league. Until now.
@@ -38,23 +70,27 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Photo */}
-      <section className="py-6 relative" aria-label="League in action">
-        <div className="section-container">
-          <div className="relative rounded-2xl overflow-hidden" style={{ height: "clamp(240px, 40vw, 500px)" }}>
-            <Image
-              src="/images/hero-shot.png"
-              alt="Players at Baseball Premier League Malaysia"
-              fill
-              quality={85}
-              className="object-cover"
-              sizes="(max-width: 768px) 100vw, 1280px"
-            />
-            <div
-              className="absolute inset-0"
-              style={{ background: "linear-gradient(to top, rgba(2,11,24,0.8) 0%, transparent 60%)" }}
-            />
-          </div>
+      {/* Full-screen Photo */}
+      <section className="relative" style={{ height: "70vh", minHeight: "400px" }} aria-label="League in action">
+        <Image
+          src="/images/hero-shot.png"
+          alt="Players at Baseball Premier League Malaysia"
+          fill
+          quality={90}
+          className="object-cover object-center"
+          sizes="100vw"
+        />
+        <div
+          className="absolute inset-0"
+          style={{ background: "linear-gradient(to top, rgba(2,11,24,1) 0%, rgba(2,11,24,0.4) 50%, rgba(2,11,24,0.2) 100%)" }}
+        />
+        <div className="absolute bottom-0 left-0 right-0 section-container pb-12">
+          <blockquote className="max-w-2xl">
+            <p className="font-heading font-bold text-2xl sm:text-3xl md:text-4xl leading-snug" style={{ color: "var(--slate-50)" }}>
+              &ldquo;Malaysia had players from local communities and from Japan, Korea, United States, China —{" "}
+              <span className="gradient-text">all of them looking for the same game.&rdquo;</span>
+            </p>
+          </blockquote>
         </div>
       </section>
 
@@ -103,25 +139,24 @@ export default function AboutPage() {
         <div className="section-container">
           <h2
             id="leadership-heading"
-            className="font-heading font-bold text-2xl sm:text-3xl mb-10"
+            className="font-heading font-bold text-2xl sm:text-3xl mb-3"
             style={{ color: "var(--slate-50)" }}
           >
             League Leadership
           </h2>
+          <p className="text-sm mb-10" style={{ color: "var(--slate-500)" }}>
+            The BPL is built by baseball people, for baseball people. Season 1 is powered by this founding team.
+          </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              { role: "Commissioner", name: LEAGUE_INFO.commissioner.name, phone: LEAGUE_INFO.commissioner.phone, detail: "All final disciplinary decisions, emergency contact." },
-              { role: "Deputy Commissioner", name: LEAGUE_INFO.deputyCommissioner.name, phone: LEAGUE_INFO.deputyCommissioner.phone, detail: "First aid kit custodian, field operations." },
-              { role: "Director of Player Development", name: "Shinji", phone: "—", detail: "Manages the Free Agent Draft and evaluation process." },
-            ].map(({ role, name, phone, detail }) => (
+            {LEADERSHIP.map(({ role, name, phone, detail }) => (
               <div key={role} className="glass-card p-6">
                 <p className="text-xs font-semibold uppercase tracking-widest mb-2" style={{ color: "var(--crimson-400)" }}>
                   {role}
                 </p>
                 <h3 className="font-heading font-bold text-xl mb-1" style={{ color: "var(--slate-50)" }}>{name}</h3>
-                {phone !== "—" && (
+                {phone && (
                   <a
-                    href={`tel:+60${phone.replace(/-/g, "")}`}
+                    href={`tel:+60${phone.replace(/[-\s]/g, "")}`}
                     className="text-sm transition-colors hover:text-white block mb-2"
                     style={{ color: "var(--slate-400)" }}
                   >
@@ -154,3 +189,5 @@ export default function AboutPage() {
     </div>
   );
 }
+
+
