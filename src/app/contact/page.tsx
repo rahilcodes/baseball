@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Mail, Phone, MessageCircle, MapPin } from "lucide-react";
+import { ContactForm } from "@/components/forms/ContactForm";
 import { LEAGUE_INFO } from "@/lib/data";
 
 export const metadata: Metadata = {
@@ -83,70 +84,7 @@ export default function ContactPage() {
               <h2 className="font-heading font-bold text-2xl mb-6" style={{ color: "var(--slate-50)" }}>
                 Send a Quick Enquiry
               </h2>
-              <form
-                action="mailto:info@bplbaseball.com"
-                method="get"
-                encType="text/plain"
-                aria-label="Contact enquiry form"
-                className="space-y-5"
-              >
-                <div>
-                  <label className="form-label" htmlFor="contact-name">Your Name</label>
-                  <input
-                    id="contact-name"
-                    name="name"
-                    type="text"
-                    className="form-field"
-                    placeholder="Full name"
-                    required
-                    autoComplete="name"
-                  />
-                </div>
-                <div>
-                  <label className="form-label" htmlFor="contact-email">Email Address</label>
-                  <input
-                    id="contact-email"
-                    name="email"
-                    type="email"
-                    className="form-field"
-                    placeholder="you@email.com"
-                    required
-                    autoComplete="email"
-                  />
-                </div>
-                <div>
-                  <label className="form-label" htmlFor="contact-subject">Subject</label>
-                  <select id="contact-subject" name="subject" className="form-field">
-                    <option value="registration">Registration Enquiry</option>
-                    <option value="sponsorship">Sponsorship Enquiry</option>
-                    <option value="rules">Rules Question</option>
-                    <option value="media">Media / Press</option>
-                    <option value="other">Other</option>
-                  </select>
-                </div>
-                <div>
-                  <label className="form-label" htmlFor="contact-message">Message</label>
-                  <textarea
-                    id="contact-message"
-                    name="body"
-                    rows={4}
-                    className="form-field resize-none"
-                    placeholder="How can we help?"
-                    required
-                  />
-                </div>
-                <button
-                  type="submit"
-                  className="w-full h-12 px-6 text-sm font-semibold rounded-xl transition-all duration-150"
-                  style={{
-                    background: "var(--crimson-400)",
-                    color: "white",
-                    boxShadow: "0 0 24px rgba(227,27,35,0.35)",
-                  }}
-                >
-                  Send Message
-                </button>
-              </form>
+              <ContactForm />
             </div>
           </div>
         </div>
