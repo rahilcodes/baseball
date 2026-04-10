@@ -156,16 +156,23 @@ export default function SponsorshipPage() {
           </p>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {SPONSOR_PACKAGES.map((pkg) => (
-              <div
-                key={pkg.tier}
-                className={`glass-card p-8 flex flex-col ${pkg.tier === "title" ? "relative" : ""}`}
-                style={
-                  pkg.tier === "title"
-                    ? { border: "1px solid rgba(245,166,35,0.4)", background: "rgba(245,166,35,0.03)" }
-                    : {}
-                }
-              >
+            {SPONSOR_PACKAGES.map((pkg) => {
+              const tierStyles = (() => {
+                if (pkg.tier === "title") return { color: "var(--gold-400)", bg: "linear-gradient(135deg, var(--gold-500) 0%, var(--gold-400) 100%)", shadow: "rgba(245,166,35,0.35)", border: "rgba(245,166,35,0.4)", cardBg: "rgba(245,166,35,0.03)" };
+                if (pkg.tier === "gold") return { color: "#FBBF24", bg: "linear-gradient(135deg, #D97706 0%, #FBBF24 100%)", shadow: "rgba(251,191,36,0.25)", border: "rgba(251,191,36,0.2)", cardBg: "rgba(251,191,36,0.02)" };
+                if (pkg.tier === "silver") return { color: "#E2E8F0", bg: "linear-gradient(135deg, #475569 0%, #94A3B8 100%)", shadow: "rgba(148,163,184,0.25)", border: "rgba(255,255,255,0.1)", cardBg: "rgba(255,255,255,0.02)" };
+                return { color: "var(--crimson-400)", bg: "var(--crimson-400)", shadow: "rgba(227,27,35,0.35)", border: "var(--glass-border)", cardBg: "transparent" };
+              })();
+
+              return (
+                <div
+                  key={pkg.tier}
+                  className={`glass-card p-8 flex flex-col ${pkg.tier === "title" ? "relative" : ""}`}
+                  style={{
+                    border: `1px solid ${tierStyles.border}`,
+                    background: tierStyles.cardBg,
+                  }}
+                >
                 {pkg.tier === "title" && (
                   <div
                     className="absolute -top-3 left-1/2 -translate-x-1/2 badge badge-gold"
@@ -191,7 +198,7 @@ export default function SponsorshipPage() {
                   </div>
                   <p
                     className="font-heading font-bold text-3xl"
-                    style={{ color: pkg.tier === "title" ? "var(--gold-400)" : "var(--crimson-400)" }}
+                    style={{ color: tierStyles.color }}
                   >
                     {pkg.priceRange}
                   </p>
@@ -203,7 +210,7 @@ export default function SponsorshipPage() {
                       <CheckCircle
                         size={14}
                         className="mt-0.5 shrink-0"
-                        style={{ color: pkg.tier === "title" ? "var(--gold-400)" : "var(--crimson-400)" }}
+                        style={{ color: tierStyles.color }}
                         aria-hidden="true"
                       />
                       {h}
@@ -212,17 +219,21 @@ export default function SponsorshipPage() {
                 </ul>
 
                 <Button
-                  variant={pkg.tier === "title" ? "primary" : "outline"}
                   size="lg"
                   asChild
-                  className="w-full"
+                  className="w-full text-white border-0 transition-transform hover:-translate-y-1"
+                  style={{
+                    background: tierStyles.bg,
+                    boxShadow: `0 0 24px ${tierStyles.shadow}`,
+                  }}
                 >
                   <Link href={`/register/sponsor?tier=${pkg.tier}`}>
-                    {pkg.tier === "title" ? "Claim Title Sponsorship" : "Enquire About This Package"}
+                    Claim {pkg.name}
                   </Link>
                 </Button>
               </div>
-            ))}
+            );
+          })}
           </div>
         </div>
       </section>
