@@ -9,6 +9,7 @@ import { supabase } from "@/lib/supabase";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
 import { OTPVerifier } from "./OTPVerifier";
+import { buildStripeUrl } from "@/lib/stripe";
 
 const STEPS = [
   { id: 1, title: "Personal Info", icon: User, fields: ["fullName", "dateOfBirth", "registrantType", "nationality", "phone", "email", "emergencyContactName", "emergencyContactPhone", "medicalConditions", "jerseySize"] },
@@ -72,7 +73,7 @@ export function FreeAgentForm() {
 
   const onSubmit: SubmitHandler<FreeAgentFormData> = async (data) => {
     try {
-      const { error } = await supabase.from('free_agents').insert([
+      const { data: insertedData, error } = await supabase.from('free_agents').insert([
         {
           full_name: data.fullName,
           date_of_birth: data.dateOfBirth,
@@ -93,8 +94,9 @@ export function FreeAgentForm() {
           waiver_agreed: data.waiverAgreed,
           physically_fit: data.physicallyFit,
           code_of_conduct_agreed: data.codeOfConductAgreed,
+          payment_status: 'pending',
         }
-      ]);
+      ]).select('id').single();
 
       if (error) throw error;
 
@@ -111,7 +113,10 @@ export function FreeAgentForm() {
         }),
       }).catch(console.error);
 
-      setSubmitted(true);
+      // Redirect to Stripe Payment Link with this record's ID embedded
+      const paymentType = data.registrantType === 'student' ? 'student_player' : 'adult_player';
+      const stripeUrl = buildStripeUrl(paymentType, insertedData.id);
+      window.location.href = stripeUrl;
     } catch (err) {
       console.error("Supabase insert error:", err);
       alert("Registration failed. Please make sure your Supabase keys are configured in .env.local.");

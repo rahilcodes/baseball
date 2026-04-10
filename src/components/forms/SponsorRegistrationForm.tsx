@@ -9,6 +9,7 @@ import { supabase } from "@/lib/supabase";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
 import { SPONSOR_PACKAGES } from "@/lib/data";
+import { buildStripeUrl, type StripePaymentType } from "@/lib/stripe";
 
 const STEPS = [
   { id: 1, title: "Company Details", icon: Building2, fields: ["companyName", "contactName", "email", "phone", "address"] },
@@ -74,7 +75,7 @@ export function SponsorRegistrationForm({ initialTier = "silver" }: SponsorRegis
 
   const onSubmit: SubmitHandler<SponsorFormData> = async (data) => {
     try {
-      const { error } = await supabase.from('sponsorship_submissions').insert([
+      const { data: insertedData, error } = await supabase.from('sponsorship_submissions').insert([
         {
           company_name: data.companyName,
           contact_name: data.contactName,
@@ -85,7 +86,7 @@ export function SponsorRegistrationForm({ initialTier = "silver" }: SponsorRegis
           package_price: data.packagePrice,
           payment_status: 'pending'
         }
-      ]);
+      ]).select('id').single();
 
       if (error) throw error;
       
@@ -100,7 +101,15 @@ export function SponsorRegistrationForm({ initialTier = "silver" }: SponsorRegis
         console.error("Failed to send emails:", await res.text());
       }
 
-      setSubmitted(true);
+      // Map sponsor tier to the Stripe payment link key
+      const tierToStripe: Record<string, StripePaymentType> = {
+        title: 'title',
+        gold: 'gold',
+        silver: 'silver',
+      };
+      const stripeType = tierToStripe[data.packageTier] ?? 'silver';
+      const stripeUrl = buildStripeUrl(stripeType, insertedData.id);
+      window.location.href = stripeUrl;
     } catch (err) {
       console.error("Submission error:", err);
       alert("Submission failed. Please try again or contact support.");
