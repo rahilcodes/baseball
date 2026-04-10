@@ -7,7 +7,7 @@ import { resend, FROM, REPLY_TO } from "@/lib/emails";
 // Stripe & Supabase (server-side only)
 // ---------------------------------------------------------------------------
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: "2025-03-31.basil",
+  apiVersion: "2026-03-25.dahlia",
 });
 
 // Use the service-role key here so we can write to any table without RLS.
