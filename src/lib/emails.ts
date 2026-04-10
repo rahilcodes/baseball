@@ -59,7 +59,7 @@ function layout(title: string, previewText: string, body: string): string {
           <tr>
             <td style="background:#060F20;border-radius:0 0 16px 16px;padding:24px 40px;border:1px solid rgba(255,255,255,0.06);border-top:1px solid rgba(255,255,255,0.04);text-align:center;">
               <p style="margin:0 0 8px;font-size:12px;color:#475569;">Questions? WhatsApp Commissioner Basit</p>
-              <a href="https://wa.me/601022763014" style="color:#E31B23;font-size:12px;text-decoration:none;font-weight:600;">+60 10-227 6014</a>
+              <a href="https://wa.me/60102276014" style="color:#E31B23;font-size:12px;text-decoration:none;font-weight:600;">+60 10-227 6014</a>
               <p style="margin:12px 0 0;font-size:11px;color:#334155;">
                 <a href="${SITE_URL}" style="color:#64748B;text-decoration:none;">${SITE_URL}</a>
                 &nbsp;·&nbsp; Selangor, Malaysia
@@ -241,7 +241,7 @@ export function sponsorWelcomeHtml(data: SponsorEmailData): string {
 
     ${ctaButton("View Sponsorship Prospectus", `${SITE_URL}/sponsorship`)}
     ${divider()}
-    ${p("For urgent enquiries, WhatsApp Commissioner Basit directly at <a href='https://wa.me/601022763014' style='color:#E31B23;'>+60 10-227 6014</a>.", "font-size:13px;color:#64748B;")}
+    ${p("For urgent enquiries, WhatsApp Commissioner Basit directly at <a href='https://wa.me/60102276014' style='color:#E31B23;'>+60 10-227 6014</a>.", "font-size:13px;color:#64748B;")}
   `;
   return layout(`Welcome to BPL, ${data.companyName}!`, `Your ${data.packageName} interest is confirmed. We'll be in touch in 24 hours.`, body);
 }
@@ -272,7 +272,7 @@ export function newLeadHtml(data: LeadEmailData): string {
       { label: "Details", value: data.detail },
     ])}
 
-    ${ctaButton("Reply via WhatsApp", `https://wa.me/${data.phone?.replace(/[^0-9]/g, "") || "601022763014"}`)}
+    ${ctaButton("Reply via WhatsApp", `https://wa.me/${data.phone?.replace(/[^0-9]/g, "") || "60102276014"}`)}
   `;
   return layout(`[BPL] New ${typeLabel}`, `New ${typeLabel}: ${data.name}`, body);
 }

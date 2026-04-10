@@ -5,7 +5,7 @@ import { MessageCircle } from "lucide-react";
 export function EmergencyFAB() {
   return (
     <a
-      href="https://wa.me/601022763014"
+      href="https://wa.me/60102276014"
       target="_blank"
       rel="noopener noreferrer"
       className="fixed bottom-4 right-4 z-50 flex items-center gap-2 px-4 h-12 rounded-full shadow-2xl transition-all duration-200 hover:-translate-y-1 active:scale-95 lg:hidden group"

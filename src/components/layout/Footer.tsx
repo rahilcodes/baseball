@@ -58,7 +58,7 @@ export function Footer() {
                 <span>Universiti Putra Malaysia (UPM), Selangor</span>
               </div>
               <a
-                href="tel:+601022763014"
+                href="tel:+60102276014"
                 className="flex items-center gap-2 text-sm transition-colors hover:text-white"
                 style={{ color: "var(--slate-500)" }}
               >

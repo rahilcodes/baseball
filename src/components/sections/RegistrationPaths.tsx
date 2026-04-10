@@ -142,7 +142,7 @@ export function RegistrationPaths() {
         <p className="text-center text-sm mt-8" style={{ color: "var(--slate-600)" }}>
           Questions? Contact Commissioner Basit at{" "}
           <a
-            href="tel:+601022763014"
+            href="tel:+60102276014"
             className="transition-colors hover:text-white underline underline-offset-4"
             style={{ color: "var(--slate-400)" }}
           >

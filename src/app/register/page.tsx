@@ -98,7 +98,7 @@ export default function RegisterPage() {
               Registration fee is Student: RM 20 / Adult: RM 40. Team managers collect and submit fees in bulk.
               Free agents pay directly. Questions?{" "}
               <a
-                href="https://wa.me/601022763014"
+                href="https://wa.me/60102276014"
                 className="underline underline-offset-4 transition-colors hover:text-white"
                 style={{ color: "var(--crimson-400)" }}
               >

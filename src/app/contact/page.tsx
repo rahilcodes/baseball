@@ -43,7 +43,7 @@ export default function ContactPage() {
                     icon: MessageCircle,
                     label: "WhatsApp (Quick)",
                     value: "Message Commissioner directly",
-                    href: "https://wa.me/601022763014",
+                    href: "https://wa.me/60102276014",
                   },
                   {
                     icon: MapPin,

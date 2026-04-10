@@ -277,7 +277,7 @@ export default function SponsorshipPage() {
               <Link href="/register/sponsor">Claim Sponsorship Now</Link>
             </Button>
             <Button variant="outline" size="xl" asChild>
-              <a href="https://wa.me/601022763014" target="_blank" rel="noopener noreferrer">
+              <a href="https://wa.me/60102276014" target="_blank" rel="noopener noreferrer">
                 WhatsApp Commissioner
               </a>
             </Button>
