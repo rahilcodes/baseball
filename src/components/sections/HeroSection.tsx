@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, ChevronDown, Trophy } from "lucide-react";
+import { ArrowRight, ChevronDown } from "lucide-react";
+import { BaseballIcon } from "@/components/ui/BplIcons";
 import { Button } from "@/components/ui/Button";
 import { Countdown } from "@/components/ui/Countdown";
 
@@ -44,7 +45,7 @@ export function HeroSection() {
       <div className="relative section-container flex flex-col items-center text-center pt-32 pb-20">
         {/* Season badge */}
         <div className="badge badge-crimson mb-8 animate-float">
-          <Trophy size={12} aria-hidden="true" />
+          <BaseballIcon size={12} aria-hidden="true" />
           <span>Season 1 — May 2026</span>
         </div>
 

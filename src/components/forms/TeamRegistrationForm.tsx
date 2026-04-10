@@ -76,13 +76,30 @@ export function TeamRegistrationForm() {
       if (error) throw error;
       
       // Use the actual database UUID for the invite link
-      setGeneratedTeamId(insertedData.id);
+      const teamId = insertedData.id;
+      setGeneratedTeamId(teamId);
+
+      // Fire-and-forget: send branded welcome + team alert emails via Resend
+      fetch('/api/team-register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          teamName: data.teamName,
+          managerName: data.managerName,
+          managerEmail: data.managerEmail,
+          teamId,
+          uniformColorHome: data.uniformColorHome,
+          uniformColorAway: data.uniformColorAway,
+        }),
+      }).catch(console.error);
+
       setSubmitted(true);
     } catch (err) {
       console.error("Supabase team insert error:", err);
       alert("Registration failed. Please make sure your Supabase keys are configured in .env.local.");
     }
   };
+
 
   const handleCopyLink = async () => {
     const link = `${window.location.origin}/register/team/join/${generatedTeamId}`;

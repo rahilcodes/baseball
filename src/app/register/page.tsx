@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, Users, UserPlus } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import { DiamondIcon, BatIcon } from "@/components/ui/BplIcons";
 import { Button } from "@/components/ui/Button";
 
 export const metadata: Metadata = {
@@ -40,7 +41,7 @@ export default function RegisterPage() {
                 className="w-20 h-20 rounded-2xl flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-110"
                 style={{ background: "rgba(245,166,35,0.1)", border: "1px solid rgba(245,166,35,0.2)" }}
               >
-                <Users size={36} style={{ color: "var(--gold-400)" }} aria-hidden="true" />
+                <DiamondIcon size={36} style={{ color: "var(--gold-400)" }} aria-hidden="true" />
               </div>
               <h2 className="font-heading font-bold text-2xl sm:text-3xl mb-3" style={{ color: "var(--slate-50)" }}>
                 Register a Team
@@ -69,7 +70,7 @@ export default function RegisterPage() {
                 className="w-20 h-20 rounded-2xl flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-110"
                 style={{ background: "rgba(227,27,35,0.1)", border: "1px solid rgba(227,27,35,0.2)" }}
               >
-                <UserPlus size={36} style={{ color: "var(--crimson-400)" }} aria-hidden="true" />
+                <BatIcon size={36} style={{ color: "var(--crimson-400)" }} aria-hidden="true" />
               </div>
               <h2 className="font-heading font-bold text-2xl sm:text-3xl mb-3" style={{ color: "var(--slate-50)" }}>
                 Free Agent

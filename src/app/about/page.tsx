@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Target, History, Heart, User } from "lucide-react";
+import { ArrowRight, User } from "lucide-react";
+import { StrikeZoneIcon, DiamondIcon, GloveIcon } from "@/components/ui/BplIcons";
 import { Button } from "@/components/ui/Button";
 
 export const metadata: Metadata = {
@@ -36,7 +37,7 @@ const LEADERSHIP = [
     name: "Tomoki",
     phone: null,
     detail: "University partnerships, media coverage, and content production.",
-    image: null,
+    image: "/images/team/tomki.jpeg",
   },
   {
     role: "Director of Player Development & Community Outreach",
@@ -92,8 +93,8 @@ export default function AboutPage() {
         <div className="absolute bottom-0 left-0 right-0 section-container pb-12">
           <blockquote className="max-w-2xl">
             <p className="font-heading font-bold text-2xl sm:text-3xl md:text-4xl leading-snug" style={{ color: "var(--slate-50)" }}>
-              &ldquo;Malaysia had players from local communities and from Japan, Korea, United States, China —{" "}
-              <span className="gradient-text">all of them looking for the same game.&rdquo;</span>
+              &ldquo;This is where the casual kickabout ends. This is where{" "}
+              <span className="gradient-text">the real league begins.&rdquo;</span>
             </p>
           </blockquote>
         </div>
@@ -105,17 +106,17 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               {
-                icon: Target,
+                icon: StrikeZoneIcon,
                 title: "Our Mission",
                 text: "To create Malaysia's most competitive and inclusive adult baseball league — one that meets international standards while serving a deeply local community.",
               },
               {
-                icon: History,
+                icon: DiamondIcon,
                 title: "Our Vision",
                 text: "A multi-state national baseball circuit by Season 3, with 300+ players, government recognition, and a clear pathway for talent to reach the national squad.",
               },
               {
-                icon: Heart,
+                icon: GloveIcon,
                 title: "Our Values",
                 text: "Respect for the game, respect for the culture. Every match pauses for the Azan. Every player — regardless of nationality — is treated as family.",
               },
@@ -149,9 +150,7 @@ export default function AboutPage() {
           >
             League Leadership
           </h2>
-          <p className="text-sm mb-10" style={{ color: "var(--slate-500)" }}>
-            The BPL is built by baseball people, for baseball people. Season 1 is powered by this founding team.
-          </p>
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {LEADERSHIP.map(({ role, name, phone, detail, image }) => (
               <div 
@@ -181,26 +180,12 @@ export default function AboutPage() {
                   </div>
                 </div>
 
-                <div className="badge badge-crimson mb-4 px-3 py-1 text-[10px]">
-                  {role}
-                </div>
-                
-                <h3 className="font-heading font-bold text-2xl mb-2" style={{ color: "var(--slate-50)" }}>
+                <h3 className="font-heading font-bold text-2xl mt-auto mb-2" style={{ color: "var(--slate-50)" }}>
                   {name}
                 </h3>
                 
-                {phone && (
-                  <a
-                    href={`tel:+60${phone.replace(/[-\s]/g, "")}`}
-                    className="text-sm transition-colors hover:text-white block mb-4 font-medium"
-                    style={{ color: "var(--gold-300)" }}
-                  >
-                    {phone}
-                  </a>
-                )}
-                
-                <p className="text-sm leading-relaxed mt-auto" style={{ color: "var(--slate-400)" }}>
-                  {detail}
+                <p className="text-[11px] font-bold uppercase tracking-widest" style={{ color: "var(--crimson-400)" }}>
+                  {role}
                 </p>
               </div>
             ))}

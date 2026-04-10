@@ -97,12 +97,27 @@ export function FreeAgentForm() {
       ]);
 
       if (error) throw error;
+
+      // Fire-and-forget: send branded welcome email via Resend
+      fetch('/api/free-agent-register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          fullName: data.fullName,
+          email: data.email,
+          primaryPosition: data.primaryPosition,
+          experienceLevel: data.experienceLevel,
+          registrantType: data.registrantType,
+        }),
+      }).catch(console.error);
+
       setSubmitted(true);
     } catch (err) {
       console.error("Supabase insert error:", err);
       alert("Registration failed. Please make sure your Supabase keys are configured in .env.local.");
     }
   };
+
 
   if (submitted) {
     return (

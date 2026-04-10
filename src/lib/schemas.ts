@@ -73,3 +73,15 @@ export const teamPlayerSchema = z.object({
 });
 
 export type TeamPlayerFormData = z.infer<typeof teamPlayerSchema>;
+
+export const sponsorSchema = z.object({
+  companyName: z.string().min(2, "Company name required"),
+  contactName: z.string().min(2, "Contact name required"),
+  email: z.string().email("Valid email required"),
+  phone: z.string().min(8, "Phone number required"),
+  address: z.string().min(5, "Full address required"),
+  packageTier: z.enum(["title", "gold", "silver"]),
+  packagePrice: z.number(),
+});
+
+export type SponsorFormData = z.infer<typeof sponsorSchema>;

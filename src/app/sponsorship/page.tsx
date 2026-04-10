@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, TrendingUp, Award, Users, CheckCircle, BarChart3 } from "lucide-react";
+import { ArrowRight, CheckCircle } from "lucide-react";
+import { BaseballIcon, DiamondIcon, ScoreboardIcon, JerseyIcon } from "@/components/ui/BplIcons";
 import { Button } from "@/components/ui/Button";
 import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
 import { SPONSOR_PACKAGES } from "@/lib/data";
@@ -20,7 +21,7 @@ const ADVANTAGES = [
   { title: "First-Mover Advantage", text: "There will only ever be ONE founding sponsor of Malaysia's first adult baseball league." },
   { title: "Exclusivity", text: "Title sponsorship: one partner only. Gold: three maximum. The earlier you commit, the more premium your position." },
   { title: "Unmatched Value", text: "At RM 0.10–0.15 per impression, BPL sponsorship outperforms digital ads, billboards, and radio — with community depth." },
-  { title: "National Recognition", text: "Government proposal submitted to KBS and MOHE. BFM endorsement in progress. Your brand grows with the league." },
+  { title: "National Recognized", text: "Government proposal being submitted to National Sports Council and Ministry of Sports & Youth." },
 ];
 
 export default function SponsorshipPage() {
@@ -50,10 +51,10 @@ export default function SponsorshipPage() {
               reaching a multicultural, mid-to-high-income audience every Sunday for 13 weeks.
             </p>
             <Button variant="primary" size="lg" asChild className="group">
-              <a href="mailto:basit@bplbaseball.com">
+              <Link href="/register/sponsor?tier=title">
                 Enquire Now
                 <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" aria-hidden="true" />
-              </a>
+              </Link>
             </Button>
           </div>
         </div>
@@ -71,10 +72,10 @@ export default function SponsorshipPage() {
           </h2>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
             {[
-              { value: 100000, suffix: "+", label: "Total Impressions (Season)", icon: TrendingUp },
-              { value: 600, suffix: "/wk", label: "Game-Day Reach (Weekly)", icon: Users },
-              { value: 13, suffix: " Sundays", label: "Live Brand Exposure", icon: BarChart3 },
-              { value: 0.15, suffix: "", prefix: "RM ", label: "Max Cost Per Impression", icon: Award, decimals: 2 },
+              { value: 100000, suffix: "+", label: "Total Impressions (Season)", icon: BaseballIcon },
+              { value: 600, suffix: "/wk", label: "Game-Day Reach (Weekly)", icon: DiamondIcon },
+              { value: 13, suffix: " Sundays", label: "Live Brand Exposure", icon: ScoreboardIcon },
+              { value: 0.15, suffix: "", prefix: "RM ", label: "Max Cost Per Impression", icon: JerseyIcon, decimals: 2 },
             ].map(({ value, suffix, prefix, label, icon: Icon, decimals }) => (
               <div key={label} className="glass-card p-6 text-center">
                 <Icon size={20} className="mx-auto mb-3" style={{ color: "var(--gold-400)" }} aria-hidden="true" />
@@ -216,9 +217,9 @@ export default function SponsorshipPage() {
                   asChild
                   className="w-full"
                 >
-                  <a href="mailto:basit@bplbaseball.com">
+                  <Link href={`/register/sponsor?tier=${pkg.tier}`}>
                     {pkg.tier === "title" ? "Claim Title Sponsorship" : "Enquire About This Package"}
-                  </a>
+                  </Link>
                 </Button>
               </div>
             ))}
@@ -262,7 +263,7 @@ export default function SponsorshipPage() {
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Button variant="primary" size="xl" asChild>
-              <a href="mailto:basit@bplbaseball.com">Email Us Now</a>
+              <Link href="/register/sponsor">Claim Sponsorship Now</Link>
             </Button>
             <Button variant="outline" size="xl" asChild>
               <a href="https://wa.me/601022763014" target="_blank" rel="noopener noreferrer">

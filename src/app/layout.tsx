@@ -92,7 +92,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body>
+      <body suppressHydrationWarning>
         <Navbar />
         <main id="main-content">{children}</main>
         <Footer />
