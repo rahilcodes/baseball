@@ -40,6 +40,7 @@ export function FreeAgentForm() {
     register,
     handleSubmit,
     trigger,
+    watch,
     formState: { errors, isSubmitting },
     getValues,
     setValue,
@@ -48,6 +49,8 @@ export function FreeAgentForm() {
     mode: "onBlur",
     defaultValues: { yearsPlaying: 0 },
   });
+
+  const selectedType = watch("registrantType");
 
   useEffect(() => {
     if (verifiedEmail) {
@@ -250,14 +253,20 @@ export function FreeAgentForm() {
               <div className="grid grid-cols-2 gap-3 mt-1">
                 <label className="cursor-pointer">
                   <input type="radio" value="student" {...register("registrantType")} className="sr-only" />
-                  <div className={cn("glass-card p-4 text-center border-2 transition-all", "border-white/10 hover:border-crimson-400")} style={{ borderColor: undefined }}>
+                  <div
+                    className="glass-card p-4 text-center border-2 transition-all"
+                    style={{ borderColor: selectedType === "student" ? "var(--gold-400)" : "rgba(255,255,255,0.1)" }}
+                  >
                     <p className="font-heading font-bold text-lg" style={{ color: "var(--gold-400)" }}>RM 20</p>
                     <p className="text-xs mt-1" style={{ color: "var(--slate-400)" }}>Student / College</p>
                   </div>
                 </label>
                 <label className="cursor-pointer">
                   <input type="radio" value="adult" {...register("registrantType")} className="sr-only" />
-                  <div className={cn("glass-card p-4 text-center border-2 transition-all", "border-white/10 hover:border-crimson-400")} style={{ borderColor: undefined }}>
+                  <div
+                    className="glass-card p-4 text-center border-2 transition-all"
+                    style={{ borderColor: selectedType === "adult" ? "var(--crimson-400)" : "rgba(255,255,255,0.1)" }}
+                  >
                     <p className="font-heading font-bold text-lg" style={{ color: "var(--crimson-400)" }}>RM 40</p>
                     <p className="text-xs mt-1" style={{ color: "var(--slate-400)" }}>Working Adult</p>
                   </div>
