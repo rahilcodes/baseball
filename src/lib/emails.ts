@@ -142,11 +142,11 @@ export function freeAgentWelcomeHtml(data: FreeAgentEmailData): string {
     ${p("You've officially entered the BPL Season 1 draft pool. Malaysia's first adult baseball league just got one player stronger.")}
     
     ${infoBox([
-      { label: "Registered As", value: "Free Agent — Draft Pool" },
-      { label: "Primary Position", value: data.primaryPosition },
-      { label: "Experience Level", value: data.experienceLevel },
-      { label: "Registration Fee", value: `${fee} — Pay on Assessment Day` },
-    ])}
+    { label: "Registered As", value: "Free Agent — Draft Pool" },
+    { label: "Primary Position", value: data.primaryPosition },
+    { label: "Experience Level", value: data.experienceLevel },
+    { label: "Registration Fee", value: `${fee} — Pay on Assessment Day` },
+  ])}
 
     ${goldBox("📅 <strong>Assessment Day: April 19 or 20</strong> at UPM (Universiti Putra Malaysia), Selangor. Commissioner Basit will WhatsApp you with the exact time slot.")}
 
@@ -184,11 +184,11 @@ export function teamWelcomeHtml(data: TeamEmailData): string {
     ${p(`Congratulations, ${data.managerName.split(" ")[0]}. Your team has been officially registered for BPL Season 1. You're part of history — Malaysia's first adult baseball league.`)}
 
     ${infoBox([
-      { label: "Team Name", value: data.teamName },
-      { label: "Manager", value: data.managerName },
-      { label: "Home Colours", value: data.uniformColorHome },
-      { label: "Away Colours", value: data.uniformColorAway },
-    ])}
+    { label: "Team Name", value: data.teamName },
+    { label: "Manager", value: data.managerName },
+    { label: "Home Colours", value: data.uniformColorHome },
+    { label: "Away Colours", value: data.uniformColorAway },
+  ])}
 
     ${goldBox("🔗 Share the link below with your players to complete their individual registrations. Each player must register before the cut-off date.")}
 
@@ -220,11 +220,11 @@ export function sponsorWelcomeHtml(data: SponsorEmailData): string {
     ${p(`Thank you for your interest in becoming a <strong style="color:${tierColor};">${data.packageName}</strong> of the Baseball Premier League. You're among the founding partners of Malaysia's first adult baseball league.`)}
 
     ${infoBox([
-      { label: "Company", value: data.companyName },
-      { label: "Sponsorship Tier", value: data.packageName },
-      { label: "Investment Value", value: `RM ${data.packagePrice.toLocaleString()}` },
-      { label: "Status", value: "Interest Received — Pending Contract" },
-    ])}
+    { label: "Company", value: data.companyName },
+    { label: "Sponsorship Tier", value: data.packageName },
+    { label: "Investment Value", value: `RM ${data.packagePrice.toLocaleString()}` },
+    { label: "Status", value: "Interest Received — Pending Contract" },
+  ])}
 
     ${goldBox("📋 <strong>Next Steps:</strong> A BPL sponsorship coordinator will reach out to you within <strong>24 hours</strong> with the formal sponsorship contract (via DocuSign) and onboarding kit detailing your brand placement, jersey rights, and matchday activations.")}
 
@@ -266,11 +266,11 @@ export function newLeadHtml(data: LeadEmailData): string {
     ${p(`A new <strong style="color:#F8FAFC;">${typeLabel}</strong> just came in through the BPL website.`)}
 
     ${infoBox([
-      { label: "Name / Company", value: data.name },
-      { label: "Email", value: data.email },
-      ...(data.phone ? [{ label: "Phone / WhatsApp", value: data.phone }] : []),
-      { label: "Details", value: data.detail },
-    ])}
+    { label: "Name / Company", value: data.name },
+    { label: "Email", value: data.email },
+    ...(data.phone ? [{ label: "Phone / WhatsApp", value: data.phone }] : []),
+    { label: "Details", value: data.detail },
+  ])}
 
     ${ctaButton("Reply via WhatsApp", `https://wa.me/${data.phone?.replace(/[^0-9]/g, "") || "60102276014"}`)}
   `;
