@@ -147,7 +147,7 @@ export default function SafetyPage() {
             </h1>
             <p className="text-base sm:text-lg leading-relaxed" style={{ color: "var(--slate-400)" }}>
               Player safety is the league&apos;s highest priority. All protocols below are mandatory for every game day. 
-              Syed (Deputy Commissioner) maintains the first aid kit at all times.
+              Shinji (Deputy Commissioner) maintains the first aid kit at all times.
             </p>
           </div>
         </div>
@@ -325,7 +325,7 @@ export default function SafetyPage() {
           <div className="glass-card p-6 sm:p-8">
             <ul className="space-y-3" role="list">
               {[
-                "First aid kit present (maintained by Syed): min 6 ice packs, elastic bandages, antiseptic wipes, gauze, sterile gloves, CPR face shield, emergency blanket, scissors",
+                "First aid kit present (maintained by Shinji): min 6 ice packs, elastic bandages, antiseptic wipes, gauze, sterile gloves, CPR face shield, emergency blanket, scissors",
                 "Cooler with ice and cold water available at all times",
                 "Location of nearest hospital posted visibly at the field",
                 "Emergency number 999 (and 112 as backup) must be known by all managers",
