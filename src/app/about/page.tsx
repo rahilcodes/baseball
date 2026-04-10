@@ -162,17 +162,17 @@ export default function AboutPage() {
                 <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-crimson-500/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
 
                 <div 
-                  className="w-32 h-32 shrink-0 rounded-full p-[3px] mb-6 relative"
+                  className="w-40 h-40 shrink-0 rounded-2xl p-[3px] mb-6 relative"
                   style={{ background: "linear-gradient(135deg, rgba(227,27,35,0.8), rgba(245,166,35,0.8))" }}
                 >
-                  <div className="w-full h-full rounded-full overflow-hidden bg-navy-900 border-4 border-navy-950 flex items-center justify-center relative">
+                  <div className="w-full h-full rounded-2xl overflow-hidden bg-navy-900 border-4 border-navy-950 flex items-center justify-center relative">
                     {image ? (
                       <Image 
                         src={image} 
                         alt={name} 
                         fill 
-                        className="object-cover transition-transform duration-500 group-hover:scale-110" 
-                        sizes="(max-width: 768px) 128px, 128px"
+                        className="object-cover object-top transition-transform duration-500 group-hover:scale-105" 
+                        sizes="(max-width: 768px) 160px, 160px"
                       />
                     ) : (
                       <User size={40} style={{ color: "var(--slate-400)" }} />
