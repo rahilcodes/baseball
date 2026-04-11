@@ -95,13 +95,27 @@ export function PlayerJoinForm({ teamId }: { teamId: string }) {
       ]);
 
       if (error) {
-        // Handle postgres foreign key error gracefully if teamId is invalid type
         if (error.code === '22P02') {
            throw new Error("Invalid Invitiation Link. Ensure you copied the full link.");
         }
         throw error;
       }
-      
+
+      // Fire emails (non-blocking — don't await so success screen shows immediately)
+      fetch('/api/player-join', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          teamId,
+          fullName: data.fullName,
+          email: data.email,
+          phone: data.phone,
+          primaryPosition: data.primaryPosition,
+          jerseySize: data.jerseySize,
+          registrantType: data.registrantType,
+        }),
+      }).catch((e) => console.error("Email dispatch failed:", e));
+
       setSubmitted(true);
     } catch (err: any) {
       console.error("Supabase player join error:", err);

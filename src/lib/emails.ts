@@ -276,3 +276,72 @@ export function newLeadHtml(data: LeadEmailData): string {
   `;
   return layout(`[BPL] New ${typeLabel}`, `New ${typeLabel}: ${data.name}`, body);
 }
+
+// ─── 6. Player Join Team — Welcome Email ──────────────────────────────────────
+export interface PlayerJoinEmailData {
+  fullName: string;
+  email: string;
+  primaryPosition: string;
+  jerseySize: string;
+  registrantType: "student" | "adult";
+  teamName: string;
+}
+export function playerJoinWelcomeHtml(data: PlayerJoinEmailData): string {
+  const fee = data.registrantType === "student" ? "RM 20 (Student)" : "RM 40 (Adult)";
+  const body = `
+    ${h1(`You're on the Roster!`)}
+    ${p(`Welcome to <strong style="color:var(--slate-50);">${data.teamName}</strong>, ${data.fullName.split(" ")[0]}! Your registration and liability waiver are confirmed. You're officially part of BPL Season 1.`)}
+
+    ${infoBox([
+      { label: "Team", value: data.teamName },
+      { label: "Primary Position", value: data.primaryPosition },
+      { label: "Jersey Size", value: data.jerseySize },
+      { label: "Registration Fee", value: `${fee} — Pay your Team Manager before opening day` },
+    ])}
+
+    ${goldBox("🗓️ <strong>Opening Day: May 4, 2026</strong> at UPM (Universiti Putra Malaysia), Selangor. Your team manager will share further details via WhatsApp.")}
+
+    ${ctaButton("View Schedule & Rules", `${SITE_URL}/rules`)}
+    ${divider()}
+    ${p("Bring a glove if you have one. Show up early. Play hard.", "font-size:13px;color:#64748B;")}
+  `;
+  return layout(`You're on the Roster — ${data.teamName}!`, `Welcome to ${data.teamName} — BPL Season 1.`, body);
+}
+
+// ─── 7. Player Join Team — Manager Alert Email ────────────────────────────────
+export interface ManagerAlertEmailData {
+  managerName: string;
+  managerEmail: string;
+  teamName: string;
+  playerName: string;
+  playerEmail: string;
+  playerPhone: string;
+  primaryPosition: string;
+  jerseySize: string;
+  registrantType: "student" | "adult";
+}
+export function playerJoinManagerAlertHtml(data: ManagerAlertEmailData): string {
+  const fee = data.registrantType === "student" ? "RM 20" : "RM 40";
+  const body = `
+    <div style="background:rgba(34,197,94,0.06);border:1px solid rgba(34,197,94,0.2);border-radius:10px;padding:12px 20px;margin-bottom:24px;">
+      <span style="font-size:11px;color:#22C55E;text-transform:uppercase;letter-spacing:2px;font-weight:700;">🟢 New Player Joined</span>
+    </div>
+
+    ${h1("New Player on Your Roster")}
+    ${p(`A new player has completed their registration and signed the liability waiver for <strong style="color:var(--slate-50);">${data.teamName}</strong>.`)}
+
+    ${infoBox([
+      { label: "Player Name", value: data.playerName },
+      { label: "Email", value: data.playerEmail },
+      { label: "WhatsApp", value: data.playerPhone },
+      { label: "Position", value: data.primaryPosition },
+      { label: "Jersey Size", value: data.jerseySize },
+      { label: "Fee to Collect", value: fee },
+    ])}
+
+    ${goldBox("💰 Reminder: Collect this player's registration fee (<strong>" + fee + "</strong>) before Opening Day — May 4, 2026.")}
+
+    ${ctaButton("Reply via WhatsApp", `https://wa.me/${data.playerPhone.replace(/[^0-9]/g, "")}`)}
+  `;
+  return layout(`[${data.teamName}] New Player Registration`, `${data.playerName} has joined your team roster.`, body);
+}
