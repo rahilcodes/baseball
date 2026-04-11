@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 const LEADERSHIP = [
   {
     role: "Commissioner",
-    name: "Basit",
+    name: "Basit Hasan",
     phone: "10-227 6014",
     detail: "All final disciplinary decisions, emergency contact, and league operations.",
     image: "/images/team/basit.jpeg",
@@ -26,15 +26,15 @@ const LEADERSHIP = [
     image: "/images/team/shinji.jpeg",
   },
   {
-    role: "Operations Manager",
+    role: "Director of Operations",
     name: "Yusuf Sadahiro",
     phone: null,
     detail: "Manages league logistics, scheduling, and operational workflows.",
     image: "/images/team/yusuf.jpeg",
   },
   {
-    role: "University & Media Coordinator",
-    name: "Tomoki",
+    role: "Director of Univ. Outreach & Media Relations",
+    name: "Tomoki Utsumi",
     phone: null,
     detail: "University partnerships, media coverage, and content production.",
     image: "/images/team/tomki.jpeg",
