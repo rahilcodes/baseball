@@ -158,7 +158,7 @@ export default function SponsorshipPage() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {SPONSOR_PACKAGES.map((pkg) => {
               const tierStyles = (() => {
-                if (pkg.tier === "title") return { color: "var(--gold-400)", bg: "linear-gradient(135deg, var(--gold-500) 0%, var(--gold-400) 100%)", shadow: "rgba(245,166,35,0.35)", border: "rgba(245,166,35,0.4)", cardBg: "rgba(245,166,35,0.03)" };
+                if (pkg.tier === "title") return { color: "var(--crimson-400)", bg: "linear-gradient(135deg, var(--crimson-500) 0%, var(--crimson-400) 100%)", shadow: "rgba(227,27,35,0.35)", border: "rgba(227,27,35,0.4)", cardBg: "rgba(227,27,35,0.03)" };
                 if (pkg.tier === "gold") return { color: "#FBBF24", bg: "linear-gradient(135deg, #D97706 0%, #FBBF24 100%)", shadow: "rgba(251,191,36,0.25)", border: "rgba(251,191,36,0.2)", cardBg: "rgba(251,191,36,0.02)" };
                 if (pkg.tier === "silver") return { color: "#E2E8F0", bg: "linear-gradient(135deg, #475569 0%, #94A3B8 100%)", shadow: "rgba(148,163,184,0.25)", border: "rgba(255,255,255,0.1)", cardBg: "rgba(255,255,255,0.02)" };
                 return { color: "var(--crimson-400)", bg: "var(--crimson-400)", shadow: "rgba(227,27,35,0.35)", border: "var(--glass-border)", cardBg: "transparent" };
@@ -175,8 +175,8 @@ export default function SponsorshipPage() {
                 >
                 {pkg.tier === "title" && (
                   <div
-                    className="absolute -top-3 left-1/2 -translate-x-1/2 badge badge-gold"
-                    style={{ fontSize: "0.7rem" }}
+                    className="absolute -top-3 left-1/2 -translate-x-1/2 badge"
+                    style={{ fontSize: "0.7rem", background: "var(--crimson-500)", color: "white", border: "1px solid rgba(227,27,35,0.4)" }}
                   >
                     Most Exclusive
                   </div>
@@ -276,7 +276,7 @@ export default function SponsorshipPage() {
             <Button variant="primary" size="xl" asChild>
               <Link href="/register/sponsor">Claim Sponsorship Now</Link>
             </Button>
-            <Button variant="outline" size="xl" asChild>
+            <Button size="xl" asChild style={{ background: "#25D366", color: "#ffffff", border: "none" }} className="hover:opacity-90">
               <a href="https://wa.me/60102276014" target="_blank" rel="noopener noreferrer">
                 WhatsApp Commissioner
               </a>
