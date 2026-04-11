@@ -37,7 +37,6 @@ export default function ContactPage() {
                     icon: Mail,
                     label: "Email",
                     value: "info@bplbaseball.com",
-                    href: "mailto:info@bplbaseball.com",
                   },
                   {
                     icon: MessageCircle,
@@ -51,31 +50,47 @@ export default function ContactPage() {
                     value: "Universiti Putra Malaysia (UPM), Selangor",
                     href: "https://maps.google.com/?q=UPM+Serdang+Selangor",
                   },
-                ].map(({ icon: Icon, label, value, href }) => (
-                  <a
-                    key={label}
-                    href={href}
-                    target={href.startsWith("http") ? "_blank" : undefined}
-                    rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
-                    className="glass-card glass-card-hover p-5 flex items-start gap-4 group"
-                  >
-                    <div
-                      className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
-                      style={{ background: "rgba(227,27,35,0.1)", border: "1px solid rgba(227,27,35,0.2)" }}
-                      aria-hidden="true"
+                ].map(({ icon: Icon, label, value, href }) => {
+                  const content = (
+                    <>
+                      <div
+                        className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
+                        style={{ background: "rgba(227,27,35,0.1)", border: "1px solid rgba(227,27,35,0.2)" }}
+                        aria-hidden="true"
+                      >
+                        <Icon size={18} style={{ color: "var(--crimson-400)" }} />
+                      </div>
+                      <div>
+                        <p className="text-xs font-semibold uppercase tracking-wider mb-0.5" style={{ color: "var(--slate-500)" }}>
+                          {label}
+                        </p>
+                        <p className={`text-sm sm:text-base font-medium transition-colors ${href ? "group-hover:text-white" : ""}`} style={{ color: "var(--slate-200)" }}>
+                          {value}
+                        </p>
+                      </div>
+                    </>
+                  );
+
+                  if (!href) {
+                     return (
+                       <div key={label} className="glass-card p-5 flex items-start gap-4">
+                         {content}
+                       </div>
+                     );
+                  }
+
+                  return (
+                    <a
+                      key={label}
+                      href={href}
+                      target={href.startsWith("http") ? "_blank" : undefined}
+                      rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+                      className="glass-card glass-card-hover p-5 flex items-start gap-4 group"
                     >
-                      <Icon size={18} style={{ color: "var(--crimson-400)" }} />
-                    </div>
-                    <div>
-                      <p className="text-xs font-semibold uppercase tracking-wider mb-0.5" style={{ color: "var(--slate-500)" }}>
-                        {label}
-                      </p>
-                      <p className="text-sm sm:text-base font-medium group-hover:text-white transition-colors" style={{ color: "var(--slate-200)" }}>
-                        {value}
-                      </p>
-                    </div>
-                  </a>
-                ))}
+                      {content}
+                    </a>
+                  );
+                })}
               </div>
             </div>
 
