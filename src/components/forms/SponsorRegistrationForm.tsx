@@ -10,6 +10,8 @@ import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
 import { SPONSOR_PACKAGES } from "@/lib/data";
 import { buildStripeUrl, type StripePaymentType } from "@/lib/stripe";
+import { useFormDraft } from "@/hooks/useFormDraft";
+import { ResumeDraftBanner } from "@/components/ui/ResumeDraftBanner";
 
 const STEPS = [
   { id: 1, title: "Company Details", icon: Building2, fields: ["companyName", "contactName", "email", "phone", "address"] },
@@ -44,6 +46,7 @@ export function SponsorRegistrationForm({ initialTier = "silver" }: SponsorRegis
     trigger,
     watch,
     setValue,
+    reset,
     formState: { errors, isSubmitting },
   } = useForm<SponsorFormData>({
     resolver: zodResolver(sponsorSchema) as any,
@@ -53,6 +56,36 @@ export function SponsorRegistrationForm({ initialTier = "silver" }: SponsorRegis
       packagePrice: parseInt(defaultPrice),
     },
   });
+
+  const { savedDraft, saveDraft, clearDraft } = useFormDraft<SponsorFormData>("bpl_draft_sponsor");
+  const [bannerDismissed, setBannerDismissed] = useState(false);
+  const showBanner = !!savedDraft && !bannerDismissed && !submitted;
+
+  const handleResume = () => {
+    if (savedDraft) {
+      reset(savedDraft.values);
+      setStep(savedDraft.step);
+      setBannerDismissed(true);
+    }
+  };
+
+  const handleStartFresh = () => {
+    clearDraft();
+    setBannerDismissed(true);
+  };
+
+  // Auto-save step
+  useEffect(() => {
+    saveDraft(step, watch());
+  }, [step, saveDraft, watch]);
+
+  // Auto-save form values
+  useEffect(() => {
+    const sub = watch((value) => {
+      saveDraft(step, value as SponsorFormData);
+    });
+    return () => sub.unsubscribe();
+  }, [watch, step, saveDraft]);
 
   const selectedTier = watch("packageTier");
   const packageDetails = SPONSOR_PACKAGES.find(p => p.tier === selectedTier);
@@ -109,6 +142,7 @@ export function SponsorRegistrationForm({ initialTier = "silver" }: SponsorRegis
       };
       const stripeType = tierToStripe[data.packageTier] ?? 'silver';
       const stripeUrl = buildStripeUrl(stripeType, insertedData.id);
+      clearDraft();
       window.location.href = stripeUrl;
     } catch (err) {
       console.error("Submission error:", err);
@@ -147,7 +181,11 @@ export function SponsorRegistrationForm({ initialTier = "silver" }: SponsorRegis
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} noValidate className="max-w-2xl mx-auto">
+    <>
+      {showBanner && (
+        <ResumeDraftBanner onResume={handleResume} onClear={handleStartFresh} />
+      )}
+      <form onSubmit={handleSubmit(onSubmit)} noValidate className="max-w-2xl mx-auto">
       {/* Stepper */}
       <div className="flex items-center justify-between mb-10">
         {STEPS.map(({ id, title, icon: Icon }) => {
@@ -289,5 +327,6 @@ export function SponsorRegistrationForm({ initialTier = "silver" }: SponsorRegis
         )}
       </div>
     </form>
+    </>
   );
 }

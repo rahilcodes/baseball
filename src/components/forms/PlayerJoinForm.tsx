@@ -5,10 +5,12 @@ import { useForm, type SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CheckCircle, AlertCircle, ChevronRight, ChevronLeft, User, ShieldCheck } from "lucide-react";
 import { teamPlayerSchema, type TeamPlayerFormData } from "@/lib/schemas";
-import { supabase } from "@/lib/supabase";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
 import { DateOfBirthPicker } from "@/components/ui/DateOfBirthPicker";
+import { useFormDraft } from "@/hooks/useFormDraft";
+import { useSessionEmail } from "@/hooks/useSessionEmail";
+import { ResumeDraftBanner } from "@/components/ui/ResumeDraftBanner";
 import { OTPVerifier } from "./OTPVerifier";
 
 function FieldError({ message }: { message?: string }) {
@@ -40,6 +42,7 @@ export function PlayerJoinForm({ teamId }: { teamId: string }) {
     handleSubmit,
     trigger,
     watch,
+    reset,
     formState: { errors, isSubmitting },
     getValues,
     setValue,
@@ -47,6 +50,43 @@ export function PlayerJoinForm({ teamId }: { teamId: string }) {
     resolver: zodResolver(teamPlayerSchema) as any,
     mode: "onBlur",
   });
+
+  const { savedDraft, saveDraft, clearDraft } = useFormDraft<TeamPlayerFormData>(`bpl_draft_player_${teamId}`);
+  const { cachedEmail, setCachedEmail, clearCachedEmail } = useSessionEmail("player_join");
+  const [bannerDismissed, setBannerDismissed] = useState(false);
+  const showBanner = !!savedDraft && !bannerDismissed && !submitted;
+
+  const handleResume = () => {
+    if (savedDraft) {
+      reset(savedDraft.values);
+      setStep(savedDraft.step);
+      if (cachedEmail && cachedEmail === savedDraft.values.email) {
+        setVerifiedEmail(cachedEmail);
+      }
+      setBannerDismissed(true);
+    }
+  };
+
+  const handleStartFresh = () => {
+    clearDraft();
+    clearCachedEmail();
+    setBannerDismissed(true);
+  };
+
+  useEffect(() => {
+    if (verifiedEmail) {
+      saveDraft(step, getValues());
+    }
+  }, [step, verifiedEmail, getValues, saveDraft]);
+
+  useEffect(() => {
+    const sub = watch(() => {
+      if (verifiedEmail) {
+        saveDraft(step, getValues());
+      }
+    });
+    return () => sub.unsubscribe();
+  }, [watch, step, verifiedEmail, getValues, saveDraft]);
 
   const selectedType = watch("registrantType");
 
@@ -101,7 +141,7 @@ export function PlayerJoinForm({ teamId }: { teamId: string }) {
         throw error;
       }
 
-      // Fire emails (non-blocking — don't await so success screen shows immediately)
+      // Fire emails (non-blocking)
       fetch('/api/player-join', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -116,6 +156,7 @@ export function PlayerJoinForm({ teamId }: { teamId: string }) {
         }),
       }).catch((e) => console.error("Email dispatch failed:", e));
 
+      clearDraft();
       setSubmitted(true);
     } catch (err: any) {
       console.error("Supabase player join error:", err);
@@ -153,11 +194,30 @@ export function PlayerJoinForm({ teamId }: { teamId: string }) {
   }
 
   if (!verifiedEmail) {
-    return <OTPVerifier onVerified={setVerifiedEmail} subtitle="To prevent spam, players must verify their identity via email before joining a roster." />;
+    return (
+      <>
+        {showBanner && (
+          <ResumeDraftBanner onResume={handleResume} onClear={handleStartFresh} />
+        )}
+        <OTPVerifier 
+          onVerified={(email) => {
+            setVerifiedEmail(email);
+            setCachedEmail(email);
+          }} 
+          title="Player Identity"
+          subtitle="To prevent spam and ensure draft integrity, please verify your email address before joining the team roster." 
+          defaultEmail={savedDraft?.values.email || ""}
+        />
+      </>
+    );
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} noValidate aria-label="Player join team form">
+    <>
+      {showBanner && (
+        <ResumeDraftBanner onResume={handleResume} onClear={handleStartFresh} />
+      )}
+      <form onSubmit={handleSubmit(onSubmit)} noValidate aria-label="Player join team form">
       {/* Stepper */}
       <div className="flex items-center justify-between mb-10 max-w-md mx-auto" role="list">
         {STEPS.map(({ id, title, icon: Icon }) => {
@@ -382,5 +442,6 @@ export function PlayerJoinForm({ teamId }: { teamId: string }) {
         )}
       </div>
     </form>
+    </>
   );
 }

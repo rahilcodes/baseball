@@ -10,14 +10,16 @@ interface OTPVerifierProps {
   onVerified: (email: string) => void;
   title?: string;
   subtitle?: string;
+  defaultEmail?: string;
 }
 
 export function OTPVerifier({ 
   onVerified, 
   title = "Identity Verification",
-  subtitle = "We require legal email identity verification prior to signing league liability waivers and accessing BPL digital systems." 
+  subtitle = "We require legal email identity verification prior to signing league liability waivers and accessing BPL digital systems.",
+  defaultEmail = ""
 }: OTPVerifierProps) {
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState(defaultEmail);
   const [otp, setOtp] = useState("");
   const [step, setStep] = useState<"email" | "otp">("email");
   const [loading, setLoading] = useState(false);

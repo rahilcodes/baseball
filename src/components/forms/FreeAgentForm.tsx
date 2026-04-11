@@ -11,6 +11,9 @@ import { cn } from "@/lib/utils";
 import { OTPVerifier } from "./OTPVerifier";
 import { buildStripeUrl } from "@/lib/stripe";
 import { DateOfBirthPicker } from "@/components/ui/DateOfBirthPicker";
+import { useFormDraft } from "@/hooks/useFormDraft";
+import { useSessionEmail } from "@/hooks/useSessionEmail";
+import { ResumeDraftBanner } from "@/components/ui/ResumeDraftBanner";
 
 const STEPS = [
   { id: 1, title: "Personal Info", icon: User, fields: ["fullName", "dateOfBirth", "registrantType", "nationality", "phone", "email", "emergencyContactName", "emergencyContactPhone", "medicalConditions", "jerseySize"] },
@@ -42,6 +45,7 @@ export function FreeAgentForm() {
     handleSubmit,
     trigger,
     watch,
+    reset,
     formState: { errors, isSubmitting },
     getValues,
     setValue,
@@ -50,6 +54,47 @@ export function FreeAgentForm() {
     mode: "onBlur",
     defaultValues: { yearsPlaying: 0 },
   });
+
+  const { savedDraft, saveDraft, clearDraft } = useFormDraft<FreeAgentFormData>("bpl_draft_free_agent");
+  const { cachedEmail, setCachedEmail, clearCachedEmail } = useSessionEmail("free_agent");
+  const [bannerDismissed, setBannerDismissed] = useState(false);
+
+  const showBanner = !!savedDraft && !bannerDismissed && !submitted;
+
+  const handleResume = () => {
+    if (savedDraft) {
+      reset(savedDraft.values);
+      setStep(savedDraft.step);
+      // Skip OTP if same session email matches
+      if (cachedEmail && cachedEmail === savedDraft.values.email) {
+        setVerifiedEmail(cachedEmail);
+      }
+      setBannerDismissed(true);
+    }
+  };
+
+  const handleStartFresh = () => {
+    clearDraft();
+    clearCachedEmail();
+    setBannerDismissed(true);
+  };
+
+  // Auto-save when step changes
+  useEffect(() => {
+    if (verifiedEmail) {
+      saveDraft(step, getValues());
+    }
+  }, [step, verifiedEmail, getValues, saveDraft]);
+
+  // Auto-save when form values change
+  useEffect(() => {
+    const sub = watch(() => {
+      if (verifiedEmail) {
+        saveDraft(step, getValues());
+      }
+    });
+    return () => sub.unsubscribe();
+  }, [watch, step, verifiedEmail, getValues, saveDraft]);
 
   const selectedType = watch("registrantType");
 
@@ -117,7 +162,9 @@ export function FreeAgentForm() {
         }),
       }).catch(console.error);
 
-      // Redirect to Stripe Payment Link with this record's ID embedded
+      // Payment successful flow — clear the draft
+      clearDraft();
+      
       const paymentType = data.registrantType === 'student' ? 'student_player' : 'adult_player';
       const stripeUrl = buildStripeUrl(paymentType, insertedData.id);
       window.location.href = stripeUrl;
@@ -161,16 +208,29 @@ export function FreeAgentForm() {
 
   if (!verifiedEmail) {
     return (
-      <OTPVerifier 
-        onVerified={setVerifiedEmail} 
-        title="Free Agent Identity"
-        subtitle="To prevent span and ensure draft integrity, please verify your email address before joining the draft pool." 
-      />
+      <>
+        {showBanner && (
+          <ResumeDraftBanner onResume={handleResume} onClear={handleStartFresh} />
+        )}
+        <OTPVerifier 
+          onVerified={(email) => {
+            setVerifiedEmail(email);
+            setCachedEmail(email);
+          }} 
+          title="Free Agent Identity"
+          subtitle="To prevent spam and ensure draft integrity, please verify your email address before joining the draft pool." 
+          defaultEmail={savedDraft?.values.email || ""}
+        />
+      </>
     );
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} noValidate aria-label="Free agent registration form">
+    <>
+      {showBanner && (
+        <ResumeDraftBanner onResume={handleResume} onClear={handleStartFresh} />
+      )}
+      <form onSubmit={handleSubmit(onSubmit)} noValidate aria-label="Free agent registration form">
       {/* Stepper */}
       <div className="flex items-center justify-between mb-10" role="list" aria-label="Registration steps">
         {STEPS.map(({ id, title, icon: Icon }) => {
@@ -488,5 +548,6 @@ export function FreeAgentForm() {
         )}
       </div>
     </form>
+    </>
   );
 }
