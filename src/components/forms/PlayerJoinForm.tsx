@@ -8,7 +8,7 @@ import { teamPlayerSchema, type TeamPlayerFormData } from "@/lib/schemas";
 import { supabase } from "@/lib/supabase";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
-
+import { DateOfBirthPicker } from "@/components/ui/DateOfBirthPicker";
 import { OTPVerifier } from "./OTPVerifier";
 
 function FieldError({ message }: { message?: string }) {
@@ -229,9 +229,16 @@ export function PlayerJoinForm({ teamId }: { teamId: string }) {
               />
               <FieldError message={errors.email?.message} />
             </div>
-            <div>
-              <label className="form-label" htmlFor="dateOfBirth">Date of Birth * (16+ Only)</label>
-              <input id="dateOfBirth" type="date" className={cn("form-field", errors.dateOfBirth && "form-field-error")} {...register("dateOfBirth", { onChange: handleDobChange })} />
+            <div className="sm:col-span-2">
+              <label className="form-label">Date of Birth * (16+ Only) — MM / DD / YYYY</label>
+              <DateOfBirthPicker
+                id="dateOfBirth"
+                hasError={!!errors.dateOfBirth}
+                onChange={(val) => {
+                  setValue("dateOfBirth", val, { shouldValidate: true });
+                  if (val) handleDobChange({ target: { value: val } } as any);
+                }}
+              />
               <FieldError message={errors.dateOfBirth?.message} />
             </div>
 

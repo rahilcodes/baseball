@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
 import { OTPVerifier } from "./OTPVerifier";
 import { buildStripeUrl } from "@/lib/stripe";
+import { DateOfBirthPicker } from "@/components/ui/DateOfBirthPicker";
 
 const STEPS = [
   { id: 1, title: "Personal Info", icon: User, fields: ["fullName", "dateOfBirth", "registrantType", "nationality", "phone", "email", "emergencyContactName", "emergencyContactPhone", "medicalConditions", "jerseySize"] },
@@ -241,9 +242,16 @@ export function FreeAgentForm() {
               <input id="fullName" className={cn("form-field", errors.fullName && "form-field-error")} {...register("fullName")} placeholder="As per IC / Passport" autoComplete="name" />
               <FieldError message={errors.fullName?.message} />
             </div>
-            <div>
-              <label className="form-label" htmlFor="dateOfBirth">Date of Birth * (16+ Only)</label>
-              <input id="dateOfBirth" type="date" className={cn("form-field", errors.dateOfBirth && "form-field-error")} {...register("dateOfBirth", { onChange: handleDobChange })} autoComplete="bday" />
+            <div className="sm:col-span-2">
+              <label className="form-label">Date of Birth * (16+ Only) — MM / DD / YYYY</label>
+              <DateOfBirthPicker
+                id="dateOfBirth"
+                hasError={!!errors.dateOfBirth}
+                onChange={(val) => {
+                  setValue("dateOfBirth", val, { shouldValidate: true });
+                  if (val) handleDobChange({ target: { value: val } } as any);
+                }}
+              />
               <FieldError message={errors.dateOfBirth?.message} />
             </div>
 
