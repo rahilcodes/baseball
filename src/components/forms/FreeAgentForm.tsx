@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ChevronRight, ChevronLeft, CheckCircle, AlertCircle, User, Target, ShieldCheck } from "lucide-react";
@@ -423,13 +423,12 @@ export function FreeAgentForm() {
               </p>
             </div>
 
-            {/* Checkboxes */}
             <div className="space-y-4">
-              {[
-                { name: "physicallyFit" as const, label: "I confirm I am physically fit to participate in competitive baseball and have not been advised against such by a medical professional." },
-                { name: "codeOfConductAgreed" as const, label: "I have read and agree to the BPL Code of Conduct, including the Azan pause protocol, and accept all disciplinary processes." },
-                { name: "waiverAgreed" as const, label: "I have read, understood, and agree to ALL terms of the BPL Player Liability Waiver. I am voluntarily waiving legal rights." },
-              ].map(({ name, label }) => (
+              {([
+                { name: "physicallyFit" as const, label: <span>I confirm I am physically fit to participate in competitive baseball and have not been advised against such by a medical professional.</span> },
+                { name: "codeOfConductAgreed" as const, label: <span>I have read and agree to the{" "}<a href="/rules" target="_blank" rel="noopener noreferrer" style={{ color: "var(--crimson-400)", textDecoration: "underline", fontWeight: 600 }} onClick={(e) => e.stopPropagation()}>BPL Code of Conduct</a>{" "}(opens in new tab), including the Azan pause protocol, and accept all disciplinary processes.</span> },
+                { name: "waiverAgreed" as const, label: <span>I have read, understood, and agree to ALL terms of the BPL Player Liability Waiver. I am voluntarily waiving legal rights.</span> },
+              ] as { name: "physicallyFit" | "codeOfConductAgreed" | "waiverAgreed"; label: React.ReactNode }[]).map(({ name, label }) => (
                 <label
                   key={name}
                   className={cn(

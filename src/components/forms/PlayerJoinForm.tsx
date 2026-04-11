@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CheckCircle, AlertCircle, ChevronRight, ChevronLeft, User, ShieldCheck } from "lucide-react";
@@ -339,11 +339,11 @@ export function PlayerJoinForm({ teamId }: { teamId: string }) {
             </div>
 
             <div className="space-y-4">
-              {[
-                { name: "physicallyFit" as const, label: "I confirm I am physically fit to participate in competitive baseball." },
-                { name: "codeOfConductAgreed" as const, label: "I have read and agree to the BPL Code of Conduct, including the Azan pause protocol." },
-                { name: "waiverAgreed" as const, label: "I am voluntarily waiving legal rights and agree to all terms of the Liability Waiver." },
-              ].map(({ name, label }) => (
+              {([
+                { name: "physicallyFit" as const, label: <span>I confirm I am physically fit to participate in competitive baseball.</span> },
+                { name: "codeOfConductAgreed" as const, label: <span>I have read and agree to the{" "}<a href="/rules" target="_blank" rel="noopener noreferrer" style={{ color: "var(--crimson-400)", textDecoration: "underline", fontWeight: 600 }} onClick={(e) => e.stopPropagation()}>BPL Code of Conduct</a>{" "}(opens in new tab), including the Azan pause protocol.</span> },
+                { name: "waiverAgreed" as const, label: <span>I am voluntarily waiving legal rights and agree to all terms of the Liability Waiver.</span> },
+              ] as { name: "physicallyFit" | "codeOfConductAgreed" | "waiverAgreed"; label: React.ReactNode }[]).map(({ name, label }) => (
                 <label
                   key={name}
                   className={cn(
