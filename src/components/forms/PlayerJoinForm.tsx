@@ -12,6 +12,7 @@ import { useFormDraft } from "@/hooks/useFormDraft";
 import { useSessionEmail } from "@/hooks/useSessionEmail";
 import { ResumeDraftBanner } from "@/components/ui/ResumeDraftBanner";
 import { OTPVerifier } from "./OTPVerifier";
+import { supabase } from "@/lib/supabase";
 
 function FieldError({ message }: { message?: string }) {
   if (!message) return null;
