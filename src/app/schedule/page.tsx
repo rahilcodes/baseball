@@ -25,7 +25,49 @@ const SCHEDULE_WEEKS = [
   ]},
 ];
 
+const SCHEDULE_READY = false;
+
 export default function SchedulePage() {
+  if (!SCHEDULE_READY) {
+    return (
+      <div className="pt-24 min-h-[70vh] flex flex-col items-center justify-center">
+        <section className="py-16 text-center w-full" aria-labelledby="schedule-heading">
+          <div className="section-container max-w-2xl mx-auto">
+            <span className="badge badge-navy mb-8" aria-hidden="true" style={{ background: "rgba(255,255,255,0.06)", color: "var(--slate-400)", border: "1px solid var(--glass-border)", display: "inline-flex", alignItems: "center", gap: "6px", padding: "4px 12px", borderRadius: "9999px", fontSize: "0.75rem", fontWeight: "600", letterSpacing: "0.05em", textTransform: "uppercase" }}>
+              Season 1 Schedule
+            </span>
+            <h1
+              id="schedule-heading"
+              className="font-heading font-bold text-4xl sm:text-5xl md:text-6xl mb-6 flex flex-col items-center justify-center gap-2"
+              style={{ color: "var(--slate-50)" }}
+            >
+              <span>Building the</span>
+              <span className="gradient-text">Fixtures</span>
+            </h1>
+            <p className="text-lg sm:text-xl leading-relaxed mb-10 mt-6" style={{ color: "var(--slate-400)" }}>
+              The official match schedule is being finalized. Fixtures will be released immediately after team rosters and the draft are completed.
+            </p>
+            <div className="glass-card p-6 inline-block text-left mx-auto">
+               <div className="flex items-center gap-5">
+                 <div className="w-12 h-12 rounded-full flex items-center justify-center shrink-0" style={{ background: "rgba(245,166,35,0.1)", border: "1px solid rgba(245,166,35,0.2)"}}>
+                    <Calendar size={20} style={{ color: "var(--gold-400)" }} />
+                 </div>
+                 <div>
+                   <p className="font-heading font-bold text-base mb-1" style={{ color: "var(--slate-50)" }}>Target Release</p>
+                   <p className="text-sm" style={{ color: "var(--slate-400)" }}>Late April (Before May 4 Opening Day)</p>
+                 </div>
+               </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    );
+  }
+
+  return <ScheduleContent />;
+}
+
+function ScheduleContent() {
   return (
     <div className="pt-24">
       <section className="py-16" aria-labelledby="schedule-heading">

@@ -145,13 +145,13 @@ export function freeAgentWelcomeHtml(data: FreeAgentEmailData): string {
     { label: "Registered As", value: "Free Agent — Draft Pool" },
     { label: "Primary Position", value: data.primaryPosition },
     { label: "Experience Level", value: data.experienceLevel },
-    { label: "Registration Fee", value: `${fee} — Pay on Assessment Day` },
+    { label: "Registration Fee", value: `${fee} — Pay on Tryouts Day` },
   ])}
 
-    ${goldBox("📅 <strong>Assessment Day: April 19 or 20</strong> at UPM (Universiti Putra Malaysia), Selangor. Commissioner Basit will WhatsApp you with the exact time slot.")}
+    ${goldBox("📅 <strong>Tryouts: April 25</strong> at UPM (Universiti Putra Malaysia), Selangor. Commissioner Basit will WhatsApp you with the exact time slot.")}
 
     <div style="margin:20px 0;">
-      <p style="margin:0 0 8px;font-size:14px;font-weight:700;color:#F1F5F9;">What to expect at assessment:</p>
+      <p style="margin:0 0 8px;font-size:14px;font-weight:700;color:#F1F5F9;">What to expect at tryouts:</p>
       <ul style="margin:0;padding-left:20px;color:#94A3B8;font-size:14px;line-height:2;">
         <li>Throwing & Fielding (Ground balls + Fly balls)</li>
         <li>Hitting — live pitching BP session</li>
@@ -165,7 +165,7 @@ export function freeAgentWelcomeHtml(data: FreeAgentEmailData): string {
     ${divider()}
     ${p("Bring your own glove if you have one. Bats and balls provided. Wear appropriate athletic wear.", "font-size:13px;color:#64748B;")}
   `;
-  return layout(`Welcome to BPL, ${data.fullName}!`, "You're in the draft pool. Assessment day coming up.", body);
+  return layout(`Welcome to BPL, ${data.fullName}!`, "You're in the draft pool. Tryouts coming up.", body);
 }
 
 // ─── 3. Team Registration Welcome Email ────────────────────────────────────────
