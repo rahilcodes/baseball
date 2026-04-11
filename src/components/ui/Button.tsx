@@ -68,9 +68,12 @@ export const Button = React.forwardRef<
   );
 
   if (asChild && React.isValidElement(children)) {
-    return React.cloneElement(children as React.ReactElement<{ className?: string; ref?: React.Ref<unknown> }>, {
+    const { style: propStyle, ...restProps } = props as { style?: React.CSSProperties; [key: string]: unknown };
+    return React.cloneElement(children as React.ReactElement<{ className?: string; style?: React.CSSProperties; ref?: React.Ref<unknown> }>, {
       className: cn(classes, (children.props as { className?: string }).className),
+      style: { ...(propStyle ?? {}), ...((children.props as { style?: React.CSSProperties }).style ?? {}) },
       ref,
+      ...restProps,
     });
   }
 

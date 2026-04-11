@@ -221,7 +221,7 @@ export default function SponsorshipPage() {
                 <Button
                   size="lg"
                   asChild
-                  className="w-full text-white border-0 transition-transform hover:-translate-y-1"
+                  className={`w-full border-0 transition-transform hover:-translate-y-1 ${pkg.tier === "silver" ? "text-[var(--navy-950)]" : "text-white"}`}
                   style={{
                     background: tierStyles.bg,
                     boxShadow: `0 0 24px ${tierStyles.shadow}`,
