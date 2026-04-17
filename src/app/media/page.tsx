@@ -34,7 +34,7 @@ const CONTENT_TYPES = [
   { icon: Video, title: "Match Highlights", description: "Weekly game recaps and best-play reels published every Sunday after match day. Distributed across Instagram, TikTok, and Facebook.", tag: "Every Sunday" },
   { icon: Camera, title: "Game Photography", description: "Professional action shots, team photos, and event coverage. Available for sponsor co-branding and shared media. High-res downloads after each game day.", tag: "Each Match Day" },
   { icon: Share2, title: "Player Spotlights", description: "Weekly player features — local stars, expat stories, and human-interest content. Authentic narratives that connect fans to the players.", tag: "Weekly" },
-  { icon: Globe, title: "Press Coverage", description: "Press releases to Malaysian sports media. Being the first adult baseball league in Malaysia guarantees editorial interest.", tag: "Season-Long" },
+  { icon: Globe, title: "Press Coverage", description: "Press releases to Malaysian sports media. Being the premier adult baseball league in Malaysia guarantees editorial interest.", tag: "Season-Long" },
 ];
 
 export default function MediaPage() {

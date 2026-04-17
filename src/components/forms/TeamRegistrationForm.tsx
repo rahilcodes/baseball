@@ -9,6 +9,8 @@ import { supabase } from "@/lib/supabase";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
 import { OTPVerifier } from "./OTPVerifier";
+import { useFormDraft } from "@/hooks/useFormDraft";
+import { ResumeDraftBanner } from "@/components/ui/ResumeDraftBanner";
 
 function FieldError({ message }: { message?: string }) {
   if (!message) return null;
@@ -40,10 +42,46 @@ export function TeamRegistrationForm() {
     formState: { errors, isSubmitting },
     getValues,
     setValue,
+    watch,
+    reset,
   } = useForm<TeamFormData>({
     resolver: zodResolver(teamSchema) as any,
     mode: "onBlur",
   });
+
+  const { savedDraft, saveDraft, clearDraft } = useFormDraft<TeamFormData>("bpl_draft_team");
+  const [bannerDismissed, setBannerDismissed] = useState(false);
+  const showBanner = !!savedDraft && !bannerDismissed && !submitted;
+
+  const handleResume = () => {
+    if (savedDraft) {
+      reset(savedDraft.values);
+      setStep(savedDraft.step);
+      setBannerDismissed(true);
+    }
+  };
+
+  const handleStartFresh = () => {
+    clearDraft();
+    setBannerDismissed(true);
+  };
+
+  // Auto-save on step change
+  useEffect(() => {
+    if (verifiedEmail) {
+      saveDraft(step, getValues());
+    }
+  }, [step, verifiedEmail, getValues, saveDraft]);
+
+  // Auto-save on form values change
+  useEffect(() => {
+    const sub = watch(() => {
+      if (verifiedEmail) {
+        saveDraft(step, getValues());
+      }
+    });
+    return () => sub.unsubscribe();
+  }, [watch, step, verifiedEmail, getValues, saveDraft]);
 
   useEffect(() => {
     if (verifiedEmail) {
@@ -93,6 +131,7 @@ export function TeamRegistrationForm() {
         }),
       }).catch(console.error);
 
+      clearDraft();
       setSubmitted(true);
     } catch (err) {
       console.error("Supabase team insert error:", err);
@@ -189,16 +228,26 @@ export function TeamRegistrationForm() {
 
   if (!verifiedEmail) {
     return (
-      <OTPVerifier 
-        onVerified={setVerifiedEmail} 
-        title="Manager Identity"
-        subtitle="To prevent unauthorized edits and spam, Team Managers must verify their email address before creating a roster." 
-      />
+      <>
+        {showBanner && (
+          <ResumeDraftBanner onResume={handleResume} onClear={handleStartFresh} />
+        )}
+        <OTPVerifier 
+          onVerified={setVerifiedEmail} 
+          title="Manager Identity"
+          subtitle="To prevent unauthorized edits and spam, Team Managers must verify their email address before creating a roster." 
+          defaultEmail={savedDraft?.values.managerEmail || ""}
+        />
+      </>
     );
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} noValidate aria-label="Team registration form">
+    <>
+      {showBanner && (
+        <ResumeDraftBanner onResume={handleResume} onClear={handleStartFresh} />
+      )}
+      <form onSubmit={handleSubmit(onSubmit)} noValidate aria-label="Team registration form">
       {/* Stepper */}
       <div className="flex items-center justify-between mb-10 max-w-md mx-auto" role="list" aria-label="Registration steps">
         {STEPS.map(({ id, title, icon: Icon }) => {
@@ -349,5 +398,6 @@ export function TeamRegistrationForm() {
         )}
       </div>
     </form>
+    </>
   );
 }

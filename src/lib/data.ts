@@ -116,11 +116,53 @@ export const SPONSOR_PACKAGES: SponsorPackage[] = [
 
 // --- Main Data Fetching Layer ---
 export async function getTeams(): Promise<Team[]> {
-  if (DATA_SOURCE === "google-sheets") {
-    // TODO: fetch from Google Sheets API
+  try {
+    const { createClient } = await import("@supabase/supabase-js");
+    const client = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+    );
+
+    // Fetch teams
+    const { data: teamsData, error: teamsError } = await client
+      .from("teams")
+      .select("id, name, short_code, manager_name, uniform_color_home, uniform_color_away, wins, losses")
+      .order("name");
+
+    if (teamsError || !teamsData || teamsData.length === 0) {
+      console.warn("Supabase teams fetch failed or empty, using mock data:", teamsError?.message);
+      return MOCK_TEAMS;
+    }
+
+    // Fetch player counts per team
+    const { data: playerCounts } = await client
+      .from("players")
+      .select("team_id");
+
+    const countMap: Record<string, number> = {};
+    if (playerCounts) {
+      for (const p of playerCounts) {
+        if (p.team_id) countMap[p.team_id] = (countMap[p.team_id] || 0) + 1;
+      }
+    }
+
+    return teamsData.map((t: any) => ({
+      id: t.id,
+      name: t.name,
+      shortCode: t.short_code || t.name.slice(0, 3).toUpperCase(),
+      colors: { home: t.uniform_color_home || "Navy", away: t.uniform_color_away || "White" },
+      manager: t.manager_name || "TBA",
+      playerCount: countMap[t.id] || 0,
+      wins: t.wins || 0,
+      losses: t.losses || 0,
+      ties: 0,
+      runsScored: 0,
+      runsAllowed: 0,
+    }));
+  } catch (err) {
+    console.warn("getTeams error, falling back to mock:", err);
     return MOCK_TEAMS;
   }
-  return MOCK_TEAMS;
 }
 
 export async function getStandings(): Promise<Standing[]> {

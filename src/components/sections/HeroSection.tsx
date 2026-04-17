@@ -54,7 +54,7 @@ export function HeroSection() {
           className="font-heading font-bold text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-none tracking-tight text-balance max-w-5xl mb-6"
           style={{ color: "var(--slate-50)" }}
         >
-          Malaysia&apos;s First{" "}
+          Malaysia&apos;s Premier{" "}
           <span className="gradient-text">Adult Baseball</span>{" "}
           League
         </h1>

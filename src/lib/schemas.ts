@@ -66,10 +66,12 @@ export const teamPlayerSchema = z.object({
   primaryPosition: z.enum(["P", "C", "1B", "2B", "SS", "3B", "LF", "CF", "RF", "DH"]).refine((v) => v !== undefined, "Select a position"),
   jerseySize: z.enum(["S", "M", "L", "XL", "XXL"]).refine((v) => v !== undefined, "Select a jersey size"),
 
-  // Compliance
   waiverAgreed: z.boolean().refine((v) => v === true, { message: "You must agree to the waiver" }),
   physicallyFit: z.boolean().refine((v) => v === true, { message: "You must confirm physical fitness" }),
   codeOfConductAgreed: z.boolean().refine((v) => v === true, { message: "You must agree to the Code of Conduct" }),
+
+  // Payment
+  paymentPreference: z.enum(["online", "cash"]).refine((v) => v !== undefined, "Select a payment preference"),
 });
 
 export type TeamPlayerFormData = z.infer<typeof teamPlayerSchema>;

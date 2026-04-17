@@ -22,7 +22,7 @@ const plusJakarta = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.bplbaseball.com"),
   title: {
-    default: "Baseball Premier League (BPL) — Malaysia's First Adult Baseball League",
+    default: "Baseball Premier League (BPL) — Malaysia's Premier Adult Baseball League",
     template: "%s | BPL Baseball Malaysia",
   },
   description:
@@ -37,14 +37,14 @@ export const metadata: Metadata = {
     locale: "en_MY",
     url: "https://www.bplbaseball.com",
     siteName: "Baseball Premier League Malaysia",
-    title: "Baseball Premier League — Malaysia's First Adult Baseball League",
+    title: "Baseball Premier League — Malaysia's Premier Adult Baseball League",
     description: "Season 1 | May–July 2026 | Selangor, Malaysia. Join the first structured adult baseball league in Malaysia.",
     images: [{ url: "/images/og-default.png", width: 1200, height: 630, alt: "BPL Baseball Malaysia" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Baseball Premier League Malaysia",
-    description: "Season 1 | May–July 2026 | Selangor. Malaysia's first adult baseball league.",
+    description: "Season 1 | May–July 2026 | Selangor. Malaysia's premier adult baseball league.",
     images: ["/images/og-default.png"],
   },
   robots: {

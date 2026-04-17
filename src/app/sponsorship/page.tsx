@@ -8,7 +8,7 @@ import { SPONSOR_PACKAGES } from "@/lib/data";
 
 export const metadata: Metadata = {
   title: "Become a Sponsor",
-  description: "Partner with Malaysia's first adult baseball league. Title, Gold, and Silver sponsorship packages from RM 1,000–15,000. 100,000+ total impressions. Be the founding sponsor.",
+  description: "Partner with Malaysia's premier adult baseball league. Title, Gold, and Silver sponsorship packages from RM 1,000–15,000. 100,000+ total impressions. Be the founding sponsor.",
 };
 
 const AUDIENCE = [
@@ -18,7 +18,7 @@ const AUDIENCE = [
 ];
 
 const ADVANTAGES = [
-  { title: "First-Mover Advantage", text: "There will only ever be ONE founding sponsor of Malaysia's first adult baseball league." },
+  { title: "First-Mover Advantage", text: "There will only ever be ONE founding sponsor of Malaysia's premier adult baseball league." },
   { title: "Exclusivity", text: "Title sponsorship: one partner only. Gold: three maximum. The earlier you commit, the more premium your position." },
   { title: "Unmatched Value", text: "At RM 0.10–0.15 per impression, BPL sponsorship outperforms digital ads, billboards, and radio — with community depth." },
   { title: "National Recognized", text: "Government proposal being submitted to National Sports Council and Ministry of Sports & Youth." },
@@ -47,7 +47,7 @@ export default function SponsorshipPage() {
               <span className="gradient-text">steps up to the plate.</span>
             </h1>
             <p className="text-lg sm:text-xl leading-relaxed mb-8" style={{ color: "var(--slate-400)" }}>
-              The Baseball Premier League is Malaysia&apos;s first adult baseball league — a premium sports property
+              The Baseball Premier League is Malaysia&apos;s premier adult baseball league — a premium sports property
               reaching a multicultural, mid-to-high-income audience every Sunday for 13 weeks.
             </p>
             <Button variant="primary" size="lg" asChild className="group">

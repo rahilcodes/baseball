@@ -50,7 +50,7 @@ export function Footer() {
               />
             </Link>
             <p className="text-sm leading-relaxed mb-6" style={{ color: "var(--slate-500)" }}>
-              Inaugural Season for Malaysia&apos;s first adult baseball league.
+              Inaugural Season for Malaysia&apos;s premier adult baseball league.
             </p>
             <div className="space-y-2">
               <div className="flex items-start gap-2 text-sm" style={{ color: "var(--slate-500)" }}>

@@ -139,7 +139,7 @@ export function freeAgentWelcomeHtml(data: FreeAgentEmailData): string {
   const fee = data.registrantType === "student" ? "RM 20 (Student)" : "RM 40 (Adult)";
   const body = `
     ${h1(`Welcome to BPL, ${data.fullName.split(" ")[0]}!`)}
-    ${p("You've officially entered the BPL Season 1 draft pool. Malaysia's first adult baseball league just got one player stronger.")}
+    ${p("You've officially entered the BPL Season 1 draft pool. Malaysia's premier adult baseball league just got one player stronger.")}
     
     ${infoBox([
     { label: "Registered As", value: "Free Agent — Draft Pool" },
@@ -181,7 +181,7 @@ export function teamWelcomeHtml(data: TeamEmailData): string {
   const joinLink = `${SITE_URL}/register/team/join/${data.teamId}`;
   const body = `
     ${h1(`${data.teamName} is in!`)}
-    ${p(`Congratulations, ${data.managerName.split(" ")[0]}. Your team has been officially registered for BPL Season 1. You're part of history — Malaysia's first adult baseball league.`)}
+    ${p(`Congratulations, ${data.managerName.split(" ")[0]}. Your team has been officially registered for BPL Season 1. You're part of history — Malaysia's premier adult baseball league.`)}
 
     ${infoBox([
     { label: "Team Name", value: data.teamName },
@@ -217,7 +217,7 @@ export function sponsorWelcomeHtml(data: SponsorEmailData): string {
   const tierColor = data.packageTier === "title" ? "#F5A623" : "#E31B23";
   const body = `
     ${h1(`Welcome aboard, ${data.contactName.split(" ")[0]}!`)}
-    ${p(`Thank you for your interest in becoming a <strong style="color:${tierColor};">${data.packageName}</strong> of the Baseball Premier League. You're among the founding partners of Malaysia's first adult baseball league.`)}
+    ${p(`Thank you for your interest in becoming a <strong style="color:${tierColor};">${data.packageName}</strong> of the Baseball Premier League. You're among the founding partners of Malaysia's premier adult baseball league.`)}
 
     ${infoBox([
     { label: "Company", value: data.companyName },

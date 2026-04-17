@@ -13,6 +13,7 @@ import { useSessionEmail } from "@/hooks/useSessionEmail";
 import { ResumeDraftBanner } from "@/components/ui/ResumeDraftBanner";
 import { OTPVerifier } from "./OTPVerifier";
 import { supabase } from "@/lib/supabase";
+import { buildStripeUrl } from "@/lib/stripe";
 
 function FieldError({ message }: { message?: string }) {
   if (!message) return null;
@@ -35,7 +36,7 @@ export function PlayerJoinForm({ teamId }: { teamId: string }) {
   // We split the fields into logical pages, but keep the schema flat
   const STEPS = [
     { id: 1, title: "Player Details", icon: User, fields: ["fullName", "phone", "email", "dateOfBirth", "registrantType", "emergencyContactName", "emergencyContactPhone", "primaryPosition", "jerseySize"] },
-    { id: 2, title: "Liability Waiver", icon: ShieldCheck, fields: ["waiverAgreed", "physicallyFit", "codeOfConductAgreed"] },
+    { id: 2, title: "Waiver & Payment", icon: ShieldCheck, fields: ["waiverAgreed", "physicallyFit", "codeOfConductAgreed", "paymentPreference"] },
   ];
 
   const {
@@ -115,7 +116,7 @@ export function PlayerJoinForm({ teamId }: { teamId: string }) {
 
   const onSubmit: SubmitHandler<TeamPlayerFormData> = async (data) => {
     try {
-      const { error } = await supabase.from('players').insert([
+      const { data: insertedPlayer, error } = await supabase.from('players').insert([
         {
           team_id: teamId,
           full_name: data.fullName,
@@ -133,7 +134,7 @@ export function PlayerJoinForm({ teamId }: { teamId: string }) {
           physically_fit: data.physicallyFit,
           code_of_conduct_agreed: data.codeOfConductAgreed,
         }
-      ]);
+      ]).select().single();
 
       if (error) {
         if (error.code === '22P02') {
@@ -158,7 +159,14 @@ export function PlayerJoinForm({ teamId }: { teamId: string }) {
       }).catch((e) => console.error("Email dispatch failed:", e));
 
       clearDraft();
-      setSubmitted(true);
+      
+      if (data.paymentPreference === 'online' && insertedPlayer) {
+        const paymentType = data.registrantType === 'student' ? 'student_player' : 'adult_player';
+        const stripeUrl = buildStripeUrl(paymentType, insertedPlayer.id);
+        window.location.href = stripeUrl;
+      } else {
+        setSubmitted(true);
+      }
     } catch (err: any) {
       console.error("Supabase player join error:", err);
       alert(err.message || "Registration failed. Ensure your Supabase keys are configured in .env.local.");
@@ -187,7 +195,9 @@ export function PlayerJoinForm({ teamId }: { teamId: string }) {
             <strong style={{ color: "var(--gold-400)" }}>
               {getValues("registrantType") === "student" ? "RM 20 (Student)" : "RM 40 (Adult)"}
             </strong>
-            . Please hand your fee directly to your Team Manager before opening day.
+            . {getValues("paymentPreference") === 'online' 
+              ? "Your online payment was successful and your roster spot is confirmed." 
+              : "Please hand your fee directly to your Team Manager before opening day."}
           </p>
         </div>
       </div>
@@ -420,6 +430,34 @@ export function PlayerJoinForm({ teamId }: { teamId: string }) {
             {(errors.waiverAgreed || errors.physicallyFit || errors.codeOfConductAgreed) && (
               <p className="form-error"><AlertCircle size={14} /> Please agree to all required items.</p>
             )}
+
+            {/* Payment Selection */}
+            <div className="space-y-4 pt-4 border-t border-white/5">
+              <p className="font-semibold text-sm" style={{ color: "var(--slate-200)" }}>Choose Payment Method</p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <label className="cursor-pointer">
+                  <input type="radio" value="online" {...register("paymentPreference")} className="sr-only" />
+                  <div
+                    className="glass-card p-4 transition-all border-2 text-center"
+                    style={{ borderColor: watch("paymentPreference") === "online" ? "var(--crimson-400)" : "rgba(255,255,255,0.1)" }}
+                  >
+                    <p className="font-heading font-bold mb-1" style={{ color: watch("paymentPreference") === "online" ? "var(--crimson-400)" : "white" }}>Pay Online</p>
+                    <p className="text-xs" style={{ color: "var(--slate-400)" }}>Secure via Stripe</p>
+                  </div>
+                </label>
+                <label className="cursor-pointer">
+                  <input type="radio" value="cash" {...register("paymentPreference")} className="sr-only" />
+                  <div
+                    className="glass-card p-4 transition-all border-2 text-center"
+                    style={{ borderColor: watch("paymentPreference") === "cash" ? "var(--gold-400)" : "rgba(255,255,255,0.1)" }}
+                  >
+                    <p className="font-heading font-bold mb-1" style={{ color: watch("paymentPreference") === "cash" ? "var(--gold-400)" : "white" }}>Pay Cash</p>
+                    <p className="text-xs" style={{ color: "var(--slate-400)" }}>To Team Manager</p>
+                  </div>
+                </label>
+              </div>
+              <FieldError message={errors.paymentPreference?.message} />
+            </div>
           </div>
         )}
       </div>

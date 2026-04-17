@@ -25,7 +25,7 @@ export function SponsorPreview() {
             <span className="gradient-text">Be historic.</span>
           </h2>
           <p className="text-base sm:text-lg max-w-2xl mx-auto" style={{ color: "var(--slate-400)" }}>
-            There will only ever be ONE founding sponsor of Malaysia&apos;s first adult baseball league.
+            There will only ever be ONE founding sponsor of Malaysia&apos;s premier adult baseball league.
             That story belongs to your brand.
           </p>
         </div>
