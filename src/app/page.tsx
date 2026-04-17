@@ -7,7 +7,6 @@ import { SponsorPreview } from "@/components/sections/SponsorPreview";
 import { SeasonSection } from "@/components/sections/SeasonSection";
 import { CTASection } from "@/components/sections/CTASection";
 import { TeamsMarquee } from "@/components/sections/TeamsMarquee";
-import { GCScoreboard } from "@/components/sections/GCScoreboard";
 
 export const metadata: Metadata = {
   title: "Baseball Premier League — Malaysia's Premier Adult Baseball League",
@@ -20,7 +19,6 @@ export default function HomePage() {
     <>
       <HeroSection />
       <TeamsMarquee />
-      <GCScoreboard />
       <StatsSection />
       <WhyJoinSection />
       <RegistrationPaths />
