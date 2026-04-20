@@ -69,7 +69,9 @@ export async function POST(request: Request) {
       let updateError = null;
 
       if (paymentType === "adult_player" || paymentType === "student_player") {
-        const { error } = await supabaseAdmin
+        // Player could be a Free Agent or joining a Team. Update both tables.
+        // A unique UUID ensures only the correct row gets updated.
+        const { error: faError } = await supabaseAdmin
           .from("free_agents")
           .update({
             payment_status: "paid",
@@ -77,7 +79,17 @@ export async function POST(request: Request) {
             paid_at: new Date().toISOString(),
           })
           .eq("id", recordId);
-        updateError = error;
+
+        const { error: plError } = await supabaseAdmin
+          .from("players")
+          .update({
+            payment_status: "paid",
+            stripe_session_id: session.id,
+            paid_at: new Date().toISOString(),
+          })
+          .eq("id", recordId);
+
+        updateError = faError || plError;
       } else if (
         paymentType === "title_sponsor" ||
         paymentType === "gold_sponsor" ||
