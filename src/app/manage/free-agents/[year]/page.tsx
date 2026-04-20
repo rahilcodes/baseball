@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Users, AlertCircle, CheckCircle2, Clock, Mail, Phone, CalendarDays, ClipboardList } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import { notFound } from "next/navigation";
+import { PlayerPaymentActions } from "@/components/dashboard/PlayerPaymentActions";
 
 export const metadata: Metadata = {
   title: "League Owner Free Agents Dashboard — BPL",
@@ -224,17 +225,7 @@ export default async function ManageFreeAgentsPage(props: { params: Promise<{ ye
                         <span className="text-[11px] text-slate-400 capitalize bg-white/5 px-2 py-1 rounded-md">{agent.playing_level || 'Unknown'}</span>
                       </td>
                       <td className="p-4">
-                         {agent.payment_status === 'paid' ? (
-                            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-emerald-500/10 border border-emerald-500/20 text-[11px] text-emerald-400 font-bold tracking-wider uppercase">
-                              <CheckCircle2 size={12} />
-                              Paid
-                            </div>
-                         ) : (
-                            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-amber-500/10 border border-amber-500/20 text-[11px] text-amber-500 font-bold tracking-wider uppercase">
-                              <Clock size={12} />
-                              Pending
-                            </div>
-                         )}
+                        <PlayerPaymentActions player={agent} isFreeAgent={true} />
                       </td>
                       <td className="p-4">
                         <div className="flex items-center gap-2">

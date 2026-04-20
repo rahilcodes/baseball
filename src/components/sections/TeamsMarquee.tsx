@@ -8,6 +8,8 @@ const TEAM_LOGOS = [
   { id: "raiders",      name: "Raiders Baseball Club", logo: "/images/team_logos/raiders.png" },
   { id: "kl-dragons",   name: "KL Dragons",            logo: "/images/team_logos/dragons.png" },
   { id: "guardians",    name: "Guardians",             logo: "/images/team_logos/guardians.png" },
+  { id: "mozac",        name: "MOZAC",                 logo: "/images/team_logos/mozac.png" },
+  { id: "persatuan",    name: "Persatuan",             logo: "/images/team_logos/persatuan.png" },
 ];
 
 // Duplicate for seamless infinite scroll
@@ -18,7 +20,7 @@ export function TeamsMarquee() {
     <section aria-label="Participating teams" className="py-10 overflow-hidden" style={{ borderTop: "1px solid var(--glass-border)", borderBottom: "1px solid var(--glass-border)", background: "rgba(255,255,255,0.01)" }}>
       <div className="section-container mb-5">
         <p className="text-xs font-semibold uppercase tracking-widest" style={{ color: "var(--slate-600)" }}>
-          Season 1 Teams
+          Corporate Partners and Teams
         </p>
       </div>
 
