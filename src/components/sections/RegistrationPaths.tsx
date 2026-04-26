@@ -83,11 +83,8 @@ export function RegistrationPaths() {
                 </li>
               ))}
             </ul>
-            <Button variant="secondary" size="lg" asChild className="group w-full">
-              <Link href="/register/team" style={{ borderColor: "rgba(245,166,35,0.3)", color: "var(--gold-300)" }}>
-                Register Your Team
-                <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" aria-hidden="true" />
-              </Link>
+            <Button variant="secondary" size="lg" disabled className="w-full opacity-50 cursor-not-allowed">
+              Registrations Closed
             </Button>
           </div>
 
@@ -129,11 +126,8 @@ export function RegistrationPaths() {
                 </li>
               ))}
             </ul>
-            <Button variant="primary" size="lg" asChild className="group w-full">
-              <Link href="/register/free-agent">
-                Register as Free Agent
-                <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" aria-hidden="true" />
-              </Link>
+            <Button variant="primary" size="lg" disabled className="w-full opacity-50 cursor-not-allowed">
+              Registrations Closed
             </Button>
           </div>
         </div>

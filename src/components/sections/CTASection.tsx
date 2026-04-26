@@ -26,8 +26,8 @@ export function CTASection() {
       />
 
       <div className="relative section-container text-center">
-        <span className="badge badge-crimson mb-6 inline-flex" aria-hidden="true">
-          Registration Open
+        <span className="badge badge-crimson mb-6 inline-flex opacity-50" aria-hidden="true">
+          Registrations Closed
         </span>
         <h2
           id="cta-heading"
@@ -42,15 +42,12 @@ export function CTASection() {
           className="text-lg sm:text-xl max-w-lg mx-auto mb-10 leading-relaxed"
           style={{ color: "var(--slate-400)" }}
         >
-          Secure your spot in Season 1 before registration closes.
-          Limited team spots available.
+          Registrations for Season 1 are now officially closed.
+          Thank you to everyone who registered!
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <Button variant="primary" size="xl" asChild className="group">
-            <Link href="/register">
-              REGISTER NOW
-              <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" aria-hidden="true" />
-            </Link>
+          <Button variant="primary" size="xl" disabled className="opacity-50 cursor-not-allowed">
+            REGISTRATIONS CLOSED
           </Button>
           <Button variant="outline" size="xl" asChild>
             <Link href="/sponsorship">Become a Sponsor</Link>

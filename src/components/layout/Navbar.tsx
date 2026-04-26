@@ -101,8 +101,8 @@ export function Navbar() {
               <Button variant="ghost" size="sm" asChild>
                 <Link href="/contact">Contact</Link>
               </Button>
-              <Button variant="primary" size="sm" asChild>
-                <Link href="/register">Register Now</Link>
+              <Button variant="primary" size="sm" disabled className="opacity-50 cursor-not-allowed">
+                Registrations Closed
               </Button>
             </div>
 
@@ -187,8 +187,8 @@ export function Navbar() {
             <Button variant="outline" size="md" asChild className="w-full">
               <Link href="/contact">Contact Us</Link>
             </Button>
-            <Button variant="primary" size="md" asChild className="w-full">
-              <Link href="/register">Register Now</Link>
+            <Button variant="primary" size="md" disabled className="w-full opacity-50 cursor-not-allowed">
+              Registrations Closed
             </Button>
           </div>
         </div>
