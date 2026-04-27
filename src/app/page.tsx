@@ -8,6 +8,7 @@ import { SeasonSection } from "@/components/sections/SeasonSection";
 import { CTASection } from "@/components/sections/CTASection";
 import { TeamsMarquee } from "@/components/sections/TeamsMarquee";
 import { GCScoreboard } from "@/components/sections/GCScoreboard";
+import { supabase } from "@/lib/supabase";
 
 export const metadata: Metadata = {
   title: "Baseball Premier League — Malaysia's Premier Adult Baseball League",
@@ -15,18 +16,26 @@ export const metadata: Metadata = {
     "Join BPL Season 1 — Malaysia's premier structured adult baseball league. Play from May–July 2026 in Selangor. Register as a player or team today. Limited spots available.",
 };
 
-export default function HomePage() {
+export default async function HomePage() {
+  const { data: settings } = await supabase
+    .from("app_settings")
+    .select("registrations_open")
+    .eq("id", 1)
+    .single();
+    
+  const registrationsOpen = settings?.registrations_open ?? false;
+
   return (
     <>
-      <HeroSection />
+      <HeroSection registrationsOpen={registrationsOpen} />
       <TeamsMarquee />
       <GCScoreboard />
       <StatsSection />
       <WhyJoinSection />
-      <RegistrationPaths />
+      <RegistrationPaths registrationsOpen={registrationsOpen} />
       <SeasonSection />
       <SponsorPreview />
-      <CTASection />
+      <CTASection registrationsOpen={registrationsOpen} />
     </>
   );
 }

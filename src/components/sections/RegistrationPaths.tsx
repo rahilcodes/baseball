@@ -18,7 +18,7 @@ const AGENT_FEATURES = [
   "Registration: RM 20 (Student) / RM 40 (Adult)",
 ];
 
-export function RegistrationPaths() {
+export function RegistrationPaths({ registrationsOpen = false }: { registrationsOpen?: boolean }) {
   return (
     <section
       className="relative py-24"
@@ -83,9 +83,18 @@ export function RegistrationPaths() {
                 </li>
               ))}
             </ul>
-            <Button variant="secondary" size="lg" disabled className="w-full opacity-50 cursor-not-allowed">
-              Registrations Closed
-            </Button>
+            {registrationsOpen ? (
+              <Button variant="secondary" size="lg" asChild className="group w-full">
+                <Link href="/register/team" style={{ borderColor: "rgba(245,166,35,0.3)", color: "var(--gold-300)" }}>
+                  Register Your Team
+                  <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" aria-hidden="true" />
+                </Link>
+              </Button>
+            ) : (
+              <Button variant="secondary" size="lg" disabled className="w-full opacity-50 cursor-not-allowed">
+                Registrations Closed
+              </Button>
+            )}
           </div>
 
           {/* Free agent */}
@@ -126,9 +135,18 @@ export function RegistrationPaths() {
                 </li>
               ))}
             </ul>
-            <Button variant="primary" size="lg" disabled className="w-full opacity-50 cursor-not-allowed">
-              Registrations Closed
-            </Button>
+            {registrationsOpen ? (
+              <Button variant="primary" size="lg" asChild className="group w-full">
+                <Link href="/register/free-agent">
+                  Register as Free Agent
+                  <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" aria-hidden="true" />
+                </Link>
+              </Button>
+            ) : (
+              <Button variant="primary" size="lg" disabled className="w-full opacity-50 cursor-not-allowed">
+                Registrations Closed
+              </Button>
+            )}
           </div>
         </div>
 

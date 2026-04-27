@@ -17,7 +17,7 @@ const NAV_LINKS = [
   { href: "/sponsorship", label: "Sponsors" },
 ];
 
-export function Navbar() {
+export function Navbar({ registrationsOpen = false }: { registrationsOpen?: boolean }) {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = React.useState(false);
   const [scrolled, setScrolled] = React.useState(false);
@@ -101,9 +101,15 @@ export function Navbar() {
               <Button variant="ghost" size="sm" asChild>
                 <Link href="/contact">Contact</Link>
               </Button>
-              <Button variant="primary" size="sm" disabled className="opacity-50 cursor-not-allowed">
-                Registrations Closed
-              </Button>
+              {registrationsOpen ? (
+                <Button variant="primary" size="sm" asChild>
+                  <Link href="/register">Register Now</Link>
+                </Button>
+              ) : (
+                <Button variant="primary" size="sm" disabled className="opacity-50 cursor-not-allowed">
+                  Registrations Closed
+                </Button>
+              )}
             </div>
 
             {/* Mobile toggle */}
@@ -187,9 +193,15 @@ export function Navbar() {
             <Button variant="outline" size="md" asChild className="w-full">
               <Link href="/contact">Contact Us</Link>
             </Button>
-            <Button variant="primary" size="md" disabled className="w-full opacity-50 cursor-not-allowed">
-              Registrations Closed
-            </Button>
+            {registrationsOpen ? (
+              <Button variant="primary" size="md" asChild className="w-full">
+                <Link href="/register">Register Now</Link>
+              </Button>
+            ) : (
+              <Button variant="primary" size="md" disabled className="w-full opacity-50 cursor-not-allowed">
+                Registrations Closed
+              </Button>
+            )}
           </div>
         </div>
       </div>

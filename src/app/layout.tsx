@@ -4,6 +4,7 @@ import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { EmergencyFAB } from "@/components/ui/EmergencyFAB";
+import { supabase } from "@/lib/supabase";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -58,9 +59,18 @@ export const metadata: Metadata = {
   manifest: "/manifest.json",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  // Fetch global registration status
+  const { data: settings } = await supabase
+    .from("app_settings")
+    .select("registrations_open")
+    .eq("id", 1)
+    .single();
+    
+  const registrationsOpen = settings?.registrations_open ?? false;
+
   return (
     <html lang="en" className={`${outfit.variable} ${plusJakarta.variable}`}>
       <head>
@@ -93,7 +103,7 @@ export default function RootLayout({
         />
       </head>
       <body suppressHydrationWarning>
-        <Navbar />
+        <Navbar registrationsOpen={registrationsOpen} />
         <main id="main-content">{children}</main>
         <Footer />
         <EmergencyFAB />

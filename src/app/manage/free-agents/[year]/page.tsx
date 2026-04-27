@@ -1,8 +1,8 @@
-import type { Metadata } from "next";
 import { Users, AlertCircle, CheckCircle2, Clock, Mail, Phone, CalendarDays, ClipboardList } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import { notFound } from "next/navigation";
 import { PlayerPaymentActions } from "@/components/dashboard/PlayerPaymentActions";
+import { RegistrationToggle } from "@/components/dashboard/RegistrationToggle";
 
 export const metadata: Metadata = {
   title: "League Owner Free Agents Dashboard — BPL",
@@ -62,6 +62,8 @@ export default async function ManageFreeAgentsPage(props: { params: Promise<{ ye
             </p>
           </div>
         </div>
+
+        <RegistrationToggle />
 
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">

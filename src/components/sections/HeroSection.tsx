@@ -7,7 +7,7 @@ import { Countdown } from "@/components/ui/Countdown";
 
 const SEASON_START = new Date("2026-05-04T09:00:00+08:00");
 
-export function HeroSection() {
+export function HeroSection({ registrationsOpen = false }: { registrationsOpen?: boolean }) {
   return (
     <section
       className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden"
@@ -76,9 +76,25 @@ export function HeroSection() {
 
         {/* CTAs */}
         <div className="flex flex-col sm:flex-row items-center gap-4 mb-16">
-          <Button variant="primary" size="xl" disabled className="opacity-50 cursor-not-allowed px-12">
-            Registrations Closed
-          </Button>
+          {registrationsOpen ? (
+            <>
+              <Button variant="primary" size="xl" asChild>
+                <Link href="/register/team" className="group">
+                  Register a Team
+                  <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" aria-hidden="true" />
+                </Link>
+              </Button>
+              <Button variant="outline" size="xl" asChild>
+                <Link href="/register/free-agent">
+                  Free Agent
+                </Link>
+              </Button>
+            </>
+          ) : (
+            <Button variant="primary" size="xl" disabled className="opacity-50 cursor-not-allowed px-12">
+              Registrations Closed
+            </Button>
+          )}
         </div>
 
         {/* Countdown */}
