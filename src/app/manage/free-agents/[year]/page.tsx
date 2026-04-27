@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { Users, AlertCircle, CheckCircle2, Clock, Mail, Phone, CalendarDays, ClipboardList } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import { notFound } from "next/navigation";
