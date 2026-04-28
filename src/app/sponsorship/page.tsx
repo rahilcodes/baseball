@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, CheckCircle } from "lucide-react";
+import Image from "next/image";
+import { ArrowRight, CheckCircle, MapPin, Phone, ExternalLink } from "lucide-react";
 import { BaseballIcon, DiamondIcon, ScoreboardIcon, JerseyIcon } from "@/components/ui/BplIcons";
 import { Button } from "@/components/ui/Button";
 import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
@@ -56,6 +57,87 @@ export default function SponsorshipPage() {
                 <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" aria-hidden="true" />
               </Link>
             </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Featured Partner: Swing! Batting Centre ── */}
+      <section className="py-10 relative" aria-label="Featured Partner">
+        <div className="section-container">
+          <div
+            className="relative overflow-hidden rounded-3xl p-8 sm:p-10 flex flex-col sm:flex-row items-center gap-8"
+            style={{
+              background: "linear-gradient(135deg, rgba(245,166,35,0.08) 0%, rgba(10,25,47,0.95) 50%, rgba(227,27,35,0.05) 100%)",
+              border: "1px solid rgba(245,166,35,0.25)",
+              boxShadow: "0 0 60px rgba(245,166,35,0.06)",
+            }}
+          >
+            {/* Glow top-left */}
+            <div
+              className="absolute top-0 left-0 w-48 h-48 rounded-full pointer-events-none"
+              style={{ background: "radial-gradient(circle, rgba(245,166,35,0.08) 0%, transparent 70%)", transform: "translate(-30%, -30%)" }}
+            />
+            {/* Badge */}
+            <div className="absolute top-4 right-4 sm:top-6 sm:right-6">
+              <span
+                className="text-[9px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full"
+                style={{ background: "rgba(245,166,35,0.15)", color: "var(--gold-400)", border: "1px solid rgba(245,166,35,0.3)" }}
+              >
+                Official Batting Partner
+              </span>
+            </div>
+
+            {/* Logo */}
+            <div
+              className="w-24 h-24 rounded-2xl shrink-0 flex items-center justify-center overflow-hidden"
+              style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(245,166,35,0.2)" }}
+            >
+              <Image
+                src="/images/swing.jpeg"
+                alt="Swing! Batting Centre"
+                width={88}
+                height={88}
+                className="object-contain"
+              />
+            </div>
+
+            {/* Info */}
+            <div className="flex-1 text-center sm:text-left">
+              <p className="text-xs font-bold uppercase tracking-widest mb-1" style={{ color: "var(--gold-400)" }}>
+                Proud Partner of BPL Season 1
+              </p>
+              <h2 className="font-heading font-bold text-2xl sm:text-3xl mb-2" style={{ color: "var(--slate-50)" }}>
+                Swing! Batting Centre
+              </h2>
+              <p className="text-sm leading-relaxed mb-4 max-w-lg" style={{ color: "var(--slate-400)" }}>
+                Klang Valley&apos;s newest baseball & softball batting centre — where fun meets fitness. From casual swings to serious practice, one stop for all skill levels.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-3 items-center sm:items-start justify-center sm:justify-start flex-wrap">
+                <div className="flex items-center gap-1.5 text-xs" style={{ color: "var(--slate-500)" }}>
+                  <MapPin size={12} className="text-crimson-400 shrink-0" />
+                  <span>L6-19, Melawati Mall, KL</span>
+                </div>
+                <div className="flex items-center gap-1.5 text-xs" style={{ color: "var(--slate-500)" }}>
+                  <Phone size={12} className="text-crimson-400 shrink-0" />
+                  <a href="tel:+60187799047" className="hover:text-white transition-colors">+60 18-779 9047</a>
+                </div>
+              </div>
+            </div>
+
+            {/* CTA */}
+            <a
+              href="https://wa.me/60187799047"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-sm shrink-0 transition-all hover:scale-105"
+              style={{
+                background: "rgba(245,166,35,0.12)",
+                border: "1px solid rgba(245,166,35,0.3)",
+                color: "var(--gold-400)",
+              }}
+            >
+              Visit Swing! <ExternalLink size={13} />
+            </a>
           </div>
         </div>
       </section>

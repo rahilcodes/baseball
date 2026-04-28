@@ -1,18 +1,19 @@
 "use client";
 
-import { ExternalLink, Trophy, TrendingUp, Users } from "lucide-react";
+import { ExternalLink, Trophy, TrendingUp, Users, ArrowRight } from "lucide-react";
 
-const GC_ORG_URL = "https://web.gc.com/organizations/SrKbLlcTiUc1";
+const GC_STANDINGS_URL = "https://web.gc.com/organizations/SrKbLlcTiUc1/standings";
 
 export function GCStandings() {
   return (
-    <div className="space-y-6">
-      {/* Feature cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+    <div className="space-y-8">
+
+      {/* Feature chips */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         {[
-          { icon: Trophy, label: "Live Rankings", desc: "W/L records updated after every game" },
-          { icon: TrendingUp, label: "Run Differential", desc: "Track runs scored and allowed per team" },
-          { icon: Users, label: "All 6 Teams", desc: "Complete league table with all clubs" },
+          { icon: Trophy,     label: "Live Rankings",     desc: "W/L records updated after every game" },
+          { icon: TrendingUp, label: "Run Differential",  desc: "Track runs scored and allowed per team" },
+          { icon: Users,      label: "All 7 Teams",       desc: "Complete league table with all clubs" },
         ].map(({ icon: Icon, label, desc }) => (
           <div key={label} className="glass-card p-5 flex items-start gap-4">
             <div
@@ -29,50 +30,69 @@ export function GCStandings() {
         ))}
       </div>
 
-      {/* Main CTA card */}
+      {/* Main CTA card with big button */}
       <div
-        className="glass-card overflow-hidden rounded-2xl relative"
+        className="glass-card rounded-2xl relative overflow-hidden"
         style={{
-          background: "linear-gradient(135deg, rgba(227,27,35,0.06) 0%, rgba(2,11,24,0.8) 100%)",
-          border: "1px solid rgba(227,27,35,0.15)",
+          background: "linear-gradient(135deg, rgba(227,27,35,0.08) 0%, rgba(2,11,24,0.9) 60%, rgba(10,25,47,0.8) 100%)",
+          border: "1px solid rgba(227,27,35,0.2)",
         }}
       >
-        {/* Glow */}
+        {/* Radial glow */}
         <div
-          className="absolute top-0 right-0 w-64 h-64 rounded-full pointer-events-none opacity-20"
-          style={{ background: "radial-gradient(circle, rgba(227,27,35,0.4) 0%, transparent 70%)", transform: "translate(30%, -30%)" }}
+          className="absolute top-0 right-0 w-80 h-80 rounded-full pointer-events-none"
+          style={{ background: "radial-gradient(circle, rgba(227,27,35,0.12) 0%, transparent 70%)", transform: "translate(30%, -30%)" }}
+        />
+        <div
+          className="absolute bottom-0 left-0 w-64 h-64 rounded-full pointer-events-none"
+          style={{ background: "radial-gradient(circle, rgba(59,130,246,0.05) 0%, transparent 70%)", transform: "translate(-30%, 30%)" }}
         />
 
-        <div className="relative p-8 sm:p-12 flex flex-col sm:flex-row items-center gap-8">
-          <div className="flex-1 text-center sm:text-left">
-            <span className="badge badge-crimson mb-4 inline-block">League Table</span>
-            <h2 className="font-heading font-bold text-2xl sm:text-3xl mb-3" style={{ color: "var(--slate-50)" }}>
-              Season 1 Standings
-            </h2>
-            <p className="text-base leading-relaxed" style={{ color: "var(--slate-400)" }}>
-              Full win/loss records, winning percentages, runs scored, and run differentials for all 6 teams — 
-              updated in real time on GameChanger after each match day.
-            </p>
+        <div className="relative p-8 sm:p-12">
+          {/* Header */}
+          <div className="flex items-center gap-2 mb-6">
+            <div className="w-2 h-2 rounded-full bg-crimson-500" />
+            <span className="text-xs font-bold uppercase tracking-widest" style={{ color: "var(--crimson-400)" }}>
+              Live via GameChanger
+            </span>
           </div>
+
+          <h2
+            className="font-heading font-bold text-3xl sm:text-4xl md:text-5xl mb-4"
+            style={{ color: "var(--slate-50)" }}
+          >
+            Season 1{" "}
+            <span className="gradient-text">Standings</span>
+          </h2>
+
+          <p className="text-base sm:text-lg leading-relaxed mb-10 max-w-xl" style={{ color: "var(--slate-400)" }}>
+            Full win/loss records, winning percentages, runs scored, and run differentials
+            for all 7 teams — updated in real time after each match day.
+          </p>
+
+          {/* Big CTA button */}
           <a
-            href={`${GC_ORG_URL}/standings`}
+            href={GC_STANDINGS_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-3 px-8 py-4 rounded-xl font-heading font-bold text-white shrink-0 transition-all duration-300 hover:scale-105 hover:shadow-xl"
+            className="inline-flex items-center gap-3 px-10 py-5 rounded-2xl font-heading font-bold text-white text-lg transition-all duration-300 hover:scale-105 group"
             style={{
               background: "var(--crimson-500)",
-              boxShadow: "0 4px 24px rgba(227,27,35,0.3)",
+              boxShadow: "0 8px 32px rgba(227,27,35,0.4), 0 0 0 1px rgba(227,27,35,0.3)",
             }}
           >
-            View Standings
-            <ExternalLink size={16} />
+            <Trophy size={20} />
+            View Standings on GameChanger
+            <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
           </a>
+
+          <p className="mt-5 text-sm flex items-center gap-2" style={{ color: "var(--slate-600)" }}>
+            <ExternalLink size={12} />
+            Opens GameChanger — free to view, no account required
+          </p>
         </div>
       </div>
 
-      <p className="text-xs text-center" style={{ color: "var(--slate-600)" }}>
-        Season begins <span style={{ color: "var(--crimson-400)" }}>May 4, 2026</span> · Powered by GameChanger
-      </p>
     </div>
   );
 }

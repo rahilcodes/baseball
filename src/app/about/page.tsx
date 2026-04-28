@@ -48,6 +48,17 @@ const LEADERSHIP = [
   },
 ];
 
+const ADVISORY_BOARD = [
+  {
+    role: "Community Partner & Advisory Board Member",
+    name: "Saravanan Subramanian",
+    title: "President, Selangor Baseball Association (SBA)",
+    detail: "A dedicated baseball professional with nearly 30 years of experience. Led Malaysia's national baseball development, represented the country at the SEA Games and Asia Cup, and has contributed to coaching, officiating, and mentoring the next generation of Malaysian baseball players.",
+    image: "/images/team/sarvanan.jpeg",
+    hashtags: ["#SelangorBaseball", "#GrowTheGame", "#MalaysiaSports"],
+  },
+];
+
 export default function AboutPage() {
   return (
     <div className="pt-24">
@@ -187,6 +198,87 @@ export default function AboutPage() {
                 <p className="text-[11px] font-bold uppercase tracking-widest" style={{ color: "var(--crimson-400)" }}>
                   {role}
                 </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Advisory Board */}
+      <section className="py-16" aria-labelledby="advisory-heading">
+        <div className="section-container">
+          <div className="mb-10">
+            <span className="badge badge-gold mb-4" aria-hidden="true">Community Partners</span>
+            <h2
+              id="advisory-heading"
+              className="font-heading font-bold text-2xl sm:text-3xl mb-3"
+              style={{ color: "var(--slate-50)" }}
+            >
+              Advisory Board
+            </h2>
+            <p className="text-base max-w-xl" style={{ color: "var(--slate-400)" }}>
+              Guided by leaders who have dedicated their lives to growing the game of baseball in Malaysia.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {ADVISORY_BOARD.map(({ role, name, title, detail, image, hashtags }) => (
+              <div
+                key={name}
+                className="glass-card p-8 flex flex-col sm:flex-row gap-6 group transition-all duration-300 hover:-translate-y-1 relative overflow-hidden"
+                style={{ border: "1px solid rgba(245,166,35,0.15)" }}
+              >
+                {/* Gold top accent */}
+                <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-yellow-500/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                {/* Glow */}
+                <div
+                  className="absolute -top-10 -right-10 w-32 h-32 rounded-full pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity"
+                  style={{ background: "radial-gradient(circle, rgba(245,166,35,0.08) 0%, transparent 70%)" }}
+                />
+
+                {/* Photo */}
+                <div
+                  className="w-28 h-36 shrink-0 rounded-xl overflow-hidden relative mx-auto sm:mx-0"
+                  style={{ border: "2px solid rgba(245,166,35,0.3)" }}
+                >
+                  <Image
+                    src={image}
+                    alt={name}
+                    fill
+                    className="object-cover object-top"
+                    sizes="112px"
+                  />
+                </div>
+
+                {/* Content */}
+                <div className="flex-1">
+                  <p
+                    className="text-[10px] font-black uppercase tracking-widest mb-1"
+                    style={{ color: "var(--gold-400)" }}
+                  >
+                    {role}
+                  </p>
+                  <h3 className="font-heading font-bold text-xl mb-0.5" style={{ color: "var(--slate-50)" }}>
+                    {name}
+                  </h3>
+                  <p className="text-xs font-semibold mb-3" style={{ color: "var(--slate-400)" }}>
+                    {title}
+                  </p>
+                  <p className="text-sm leading-relaxed mb-4" style={{ color: "var(--slate-500)" }}>
+                    {detail}
+                  </p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {hashtags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="text-[10px] font-bold px-2 py-0.5 rounded-full"
+                        style={{ background: "rgba(245,166,35,0.08)", color: "var(--gold-400)", border: "1px solid rgba(245,166,35,0.15)" }}
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
               </div>
             ))}
           </div>
