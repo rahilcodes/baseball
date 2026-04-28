@@ -15,7 +15,7 @@ const TEAMS = [
     colors: { home: "#FF69B4", away: "#1a1a1a" },
     colorLabel: "Pink / Black",
     logo: "/images/team_logos/urgents.png",
-    playerCount: 0,
+    playerCount: 26,
     wins: 0,
     losses: 0,
   },
@@ -26,7 +26,7 @@ const TEAMS = [
     colors: { home: "#F8FAFC", away: "#94A3B8" },
     colorLabel: "White / Grey",
     logo: "/images/team_logos/sunway.png",
-    playerCount: 0,
+    playerCount: 25,
     wins: 0,
     losses: 0,
   },
@@ -37,7 +37,7 @@ const TEAMS = [
     colors: { home: "#7C3AED", away: "#7C3AED" },
     colorLabel: "Purple / Purple",
     logo: "/images/team_logos/ravens.png",
-    playerCount: 0,
+    playerCount: 21,
     wins: 0,
     losses: 0,
   },
@@ -48,7 +48,7 @@ const TEAMS = [
     colors: { home: "#111827", away: "#F8FAFC" },
     colorLabel: "Black / White",
     logo: "/images/team_logos/raiders.png",
-    playerCount: 0,
+    playerCount: 21,
     wins: 0,
     losses: 0,
   },
@@ -59,7 +59,7 @@ const TEAMS = [
     colors: { home: "#F8FAFC", away: "#3B82F6" },
     colorLabel: "White / Blue",
     logo: "/images/team_logos/dragons.png",
-    playerCount: 0,
+    playerCount: 19,
     wins: 0,
     losses: 0,
   },
@@ -70,7 +70,18 @@ const TEAMS = [
     colors: { home: "#DC2626", away: "#9CA3AF" },
     colorLabel: "Red / Gray",
     logo: "/images/team_logos/guardians.png",
-    playerCount: 0,
+    playerCount: 19,
+    wins: 0,
+    losses: 0,
+  },
+  {
+    id: "pendekar",
+    name: "PENDEKAR BESBOL TEAM",
+    manager: "TBD",
+    colors: { home: "#F8FAFC", away: "#3B82F6" },
+    colorLabel: "White / Blue",
+    logo: "/images/team_logos/pendekar.png",
+    playerCount: 14,
     wins: 0,
     losses: 0,
   },
@@ -94,7 +105,7 @@ export default function TeamsPage() {
               <span className="gradient-text">Teams</span>
             </h1>
             <p className="mt-4 text-base" style={{ color: "var(--slate-400)" }}>
-              {TEAMS.length} teams competing in Malaysia&apos;s inaugural baseball league.
+              {TEAMS.length} teams · {TEAMS.reduce((s, t) => s + t.playerCount, 0)} players competing in Malaysia&apos;s inaugural baseball league.
             </p>
           </div>
 

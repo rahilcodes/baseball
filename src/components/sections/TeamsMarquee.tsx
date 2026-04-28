@@ -8,6 +8,7 @@ const TEAM_LOGOS = [
   { id: "raiders",      name: "Raiders Baseball Club", logo: "/images/team_logos/raiders.png" },
   { id: "kl-dragons",   name: "KL Dragons",            logo: "/images/team_logos/dragons.png" },
   { id: "guardians",    name: "Guardians",             logo: "/images/team_logos/guardians.png" },
+  { id: "pendekar",     name: "PENDEKAR BESBOL TEAM",  logo: "/images/team_logos/pendekar.png" },
   { id: "mozac",        name: "MOZAC",                 logo: "/images/team_logos/mozac.png" },
   { id: "persatuan",    name: "Persatuan",             logo: "/images/team_logos/persatuan.png" },
 ];
