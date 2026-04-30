@@ -47,8 +47,8 @@ export default function ContactPage() {
                   {
                     icon: MapPin,
                     label: "Venue",
-                    value: "Universiti Putra Malaysia (UPM), Selangor",
-                    href: "https://maps.google.com/?q=UPM+Serdang+Selangor",
+                    value: "Oasis International School",
+                    href: "https://maps.google.com/?q=Oasis+International+School+Kuala+Lumpur",
                   },
                 ].map(({ icon: Icon, label, value, href }) => {
                   const content = (
