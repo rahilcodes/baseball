@@ -35,20 +35,16 @@ export function StatsSection() {
 
         {/* Stats grid */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-          {STATS.map(({ value, suffix, label, description, isZero }) => (
+          {STATS.map(({ value, suffix, label, description }) => (
             <div
               key={label}
               className="glass-card glass-card-hover p-6 sm:p-8 flex flex-col items-center text-center"
             >
               <div
                 className="font-heading font-bold text-4xl sm:text-5xl mb-2"
-                style={{ color: isZero ? "var(--crimson-400)" : "var(--slate-50)" }}
+                style={{ color: "var(--slate-50)" }}
               >
-                {isZero ? (
-                  <span className="tabular-nums">0</span>
-                ) : (
-                  <AnimatedCounter end={value} suffix={suffix} />
-                )}
+                <AnimatedCounter end={value} suffix={suffix} />
               </div>
               <p
                 className="font-heading font-semibold text-sm sm:text-base mb-1"
