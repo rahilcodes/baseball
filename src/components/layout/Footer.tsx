@@ -55,7 +55,7 @@ export function Footer() {
             <div className="space-y-2">
               <div className="flex items-start gap-2 text-sm" style={{ color: "var(--slate-500)" }}>
                 <MapPin size={14} className="mt-0.5 shrink-0" style={{ color: "var(--crimson-400)" }} />
-                <span>Universiti Putra Malaysia (UPM), Selangor</span>
+                <span>Oasis International School</span>
               </div>
               <a
                 href="tel:+60102276014"

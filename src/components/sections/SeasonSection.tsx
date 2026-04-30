@@ -2,26 +2,14 @@ import { Calendar, MapPin, Clock } from "lucide-react";
 
 const TIMELINE = [
   {
-    phase: "Registration",
-    date: "Now — Apr 24, 2026",
-    description: "Open registration for teams and free agents. Free Agent Tryouts on Saturday, April 25 at 10 AM at UPM.",
+    phase: "Season Opener",
+    date: "May 3, 2026",
+    description: "First pitch. 2–3 games every Sunday at Oasis International School.",
     status: "now",
   },
   {
-    phase: "Draft Day & Free Agent Tryouts",
-    date: "Apr 25, 2026 · 10 AM",
-    description: "Free agents evaluated and placed onto teams via the BPL serpentine draft for competitive balance. All unattached players must attend.",
-    status: "upcoming",
-  },
-  {
-    phase: "Season Opener",
-    date: "May 3, 2026",
-    description: "First pitch. 2–3 games every Sunday at Universiti Putra Malaysia (UPM), Selangor.",
-    status: "upcoming",
-  },
-  {
     phase: "Regular Season",
-    date: "May 4 — Jun 2026",
+    date: "May 3 — Jun 2026",
     description: "7-inning WBSC-standard games. Stats tracked. Standings updated in real time after every match day.",
     status: "upcoming",
   },
@@ -69,7 +57,7 @@ export function SeasonSection() {
             <div className="space-y-4">
               {[
                 { icon: Calendar, text: "Season 1: May 4 – July 2026" },
-                { icon: MapPin, text: "Universiti Putra Malaysia (UPM), Selangor" },
+                { icon: MapPin, text: "Oasis International School" },
                 { icon: Clock, text: "2–3 games every Sunday" },
               ].map(({ icon: Icon, text }) => (
                 <div key={text} className="flex items-center gap-3">

@@ -4,6 +4,7 @@ import { StatsSection } from "@/components/sections/StatsSection";
 import { WhyJoinSection } from "@/components/sections/WhyJoinSection";
 import { RegistrationPaths } from "@/components/sections/RegistrationPaths";
 import { SponsorPreview } from "@/components/sections/SponsorPreview";
+import { FeaturedSponsor } from "@/components/sections/FeaturedSponsor";
 import { SeasonSection } from "@/components/sections/SeasonSection";
 import { CTASection } from "@/components/sections/CTASection";
 import { TeamsMarquee } from "@/components/sections/TeamsMarquee";
@@ -28,6 +29,7 @@ export default async function HomePage() {
   return (
     <>
       <HeroSection registrationsOpen={registrationsOpen} />
+      <FeaturedSponsor />
       <TeamsMarquee />
       <GCScoreboard />
       <StatsSection />

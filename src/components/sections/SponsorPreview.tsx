@@ -12,55 +12,6 @@ export function SponsorPreview() {
       aria-labelledby="sponsor-heading"
     >
       <div className="section-container">
-        {/* ── Swing! Batting Centre — Featured Partner strip ── */}
-        <a
-          href="https://wa.me/60187799047"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex flex-col sm:flex-row items-center gap-5 mb-12 rounded-2xl p-5 sm:p-6 group transition-all hover:scale-[1.01]"
-          style={{
-            background: "linear-gradient(135deg, rgba(245,166,35,0.07) 0%, rgba(10,25,47,0.9) 100%)",
-            border: "1px solid rgba(245,166,35,0.2)",
-          }}
-          aria-label="Swing! Batting Centre — Official Batting Partner"
-        >
-          {/* Logo */}
-          <div
-            className="w-14 h-14 rounded-xl shrink-0 overflow-hidden flex items-center justify-center"
-            style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(245,166,35,0.15)" }}
-          >
-            <Image src="/images/swing.jpeg" alt="Swing! Batting Centre" width={52} height={52} className="object-contain" />
-          </div>
-
-          {/* Text */}
-          <div className="flex-1 text-center sm:text-left">
-            <span
-              className="text-[9px] font-black uppercase tracking-widest"
-              style={{ color: "var(--gold-400)" }}
-            >
-              Official Batting Partner
-            </span>
-            <p className="font-heading font-bold text-base" style={{ color: "var(--slate-50)" }}>
-              Swing! Batting Centre
-            </p>
-            <div className="flex items-center gap-3 mt-0.5 justify-center sm:justify-start flex-wrap">
-              <span className="flex items-center gap-1 text-[11px]" style={{ color: "var(--slate-500)" }}>
-                <MapPin size={10} className="text-crimson-400" /> Melawati Mall, KL
-              </span>
-              <span className="flex items-center gap-1 text-[11px]" style={{ color: "var(--slate-500)" }}>
-                <Phone size={10} className="text-crimson-400" /> +60 18-779 9047
-              </span>
-            </div>
-          </div>
-
-          <span
-            className="inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-lg shrink-0"
-            style={{ background: "rgba(245,166,35,0.1)", color: "var(--gold-400)", border: "1px solid rgba(245,166,35,0.2)" }}
-          >
-            Visit <ExternalLink size={11} />
-          </span>
-        </a>
-
         {/* Header */}
         <div className="text-center mb-16">
           <span className="badge badge-gold mb-4" aria-hidden="true">

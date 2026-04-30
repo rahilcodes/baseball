@@ -61,10 +61,10 @@ export function HeroSection({ registrationsOpen = false }: { registrationsOpen?:
 
         {/* Sub-headline */}
         <p
-          className="text-lg sm:text-xl md:text-2xl leading-relaxed max-w-2xl mb-4"
-          style={{ color: "var(--slate-400)" }}
+          className="text-lg sm:text-xl md:text-2xl leading-relaxed max-w-2xl mb-4 font-bold tracking-widest uppercase"
+          style={{ color: "var(--crimson-400)" }}
         >
-          Season 1 · Selangor · May–July 2026
+          SEASON 1 HAS BEGUN
         </p>
         <p
           className="text-base sm:text-lg leading-relaxed max-w-xl mb-12"

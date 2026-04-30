@@ -1,10 +1,9 @@
 import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
 
 const STATS = [
-  { value: 100, suffix: "+", label: "Registered Players", description: "Active adults ready to compete" },
-  { value: 6, suffix: "", label: "Competitive Teams", description: "WBSC-standard match format" },
-  { value: 13, suffix: "", label: "Weeks of Competition", description: "Regular season + playoffs" },
-  { value: 0, suffix: "", label: "Adult Leagues Before Us", description: "We are building history", isZero: true },
+  { value: 150, suffix: "+", label: "Registered Players", description: "Active adults ready to compete" },
+  { value: 7, suffix: "", label: "Competitive Teams", description: "WBSC-standard match format" },
+  { value: 14, suffix: "", label: "Weeks of Competition", description: "Regular season + playoffs" },
 ];
 
 export function StatsSection() {

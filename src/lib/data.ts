@@ -16,7 +16,7 @@ export const LEAGUE_INFO = {
   startDate: "2026-05-03",
   endDate: "2026-07-31",
   draftDate: "2026-04-25",
-  venue: "Universiti Putra Malaysia (UPM), Selangor",
+  venue: "Oasis International School",
   commissioner: { name: "Basit", phone: "10-227 6014" },
   deputyCommissioner: { name: "Shinji Konishi", phone: "11-2790 4034" },
   website: "www.bplbaseball.com",
