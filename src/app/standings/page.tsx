@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { GCStandings } from "@/components/sections/GCStandings";
+import { LeagueStandingsTable } from "@/components/sections/LeagueStandingsTable";
+import { ExternalLink, Trophy } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Standings — BPL Season 1",
@@ -27,7 +28,24 @@ export default function StandingsPage() {
             </p>
           </div>
 
-          <GCStandings />
+          <LeagueStandingsTable />
+
+          <div className="mt-12 flex justify-center">
+            <a
+              href="https://web.gc.com/organizations/SrKbLlcTiUc1/standings"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 px-8 py-4 rounded-xl font-heading font-bold text-white text-base transition-all duration-300 hover:scale-[1.02]"
+              style={{
+                background: "linear-gradient(135deg, rgba(227,27,35,0.8) 0%, rgba(183,28,28,0.9) 100%)",
+                boxShadow: "0 8px 24px rgba(227,27,35,0.25)",
+              }}
+            >
+              <Trophy size={18} />
+              View on GameChanger
+              <ExternalLink size={16} className="ml-1 opacity-70" />
+            </a>
+          </div>
         </div>
       </section>
     </div>
