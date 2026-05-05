@@ -17,7 +17,7 @@ const TEAMS = [
     logo: "/images/team_logos/urgents.png",
     playerCount: 26,
     wins: 0,
-    losses: 0,
+    losses: 1,
   },
   {
     id: "sunway",
@@ -27,7 +27,7 @@ const TEAMS = [
     colorLabel: "White / Grey",
     logo: "/images/team_logos/sunway.png",
     playerCount: 25,
-    wins: 0,
+    wins: 1,
     losses: 0,
   },
   {
@@ -39,7 +39,7 @@ const TEAMS = [
     logo: "/images/team_logos/ravens.png",
     playerCount: 21,
     wins: 0,
-    losses: 0,
+    losses: 1,
   },
   {
     id: "raiders",
@@ -50,7 +50,7 @@ const TEAMS = [
     logo: "/images/team_logos/raiders.png",
     playerCount: 21,
     wins: 0,
-    losses: 0,
+    losses: 1,
   },
   {
     id: "kl-dragons",
@@ -60,7 +60,7 @@ const TEAMS = [
     colorLabel: "White / Blue",
     logo: "/images/team_logos/dragons.png",
     playerCount: 19,
-    wins: 0,
+    wins: 1,
     losses: 0,
   },
   {
@@ -71,7 +71,7 @@ const TEAMS = [
     colorLabel: "Red / Gray",
     logo: "/images/team_logos/guardians.png",
     playerCount: 19,
-    wins: 0,
+    wins: 1,
     losses: 0,
   },
   {
@@ -198,9 +198,8 @@ export default function TeamsPage() {
           {/* Season note */}
           <div className="glass-card p-6 mt-12 text-center">
             <p className="text-sm" style={{ color: "var(--slate-500)" }}>
-              Season 1 has not started yet. Team records will be updated live after each match day.
-              Season begins{" "}
-              <span style={{ color: "var(--crimson-400)" }}>May 4, 2026</span>.
+              Season 1 is now active! Team records are updated live after each match day.
+              First pitch was on <span style={{ color: "var(--crimson-400)" }}>May 3, 2026</span>.
             </p>
           </div>
         </div>
