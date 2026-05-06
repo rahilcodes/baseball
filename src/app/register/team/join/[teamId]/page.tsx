@@ -84,7 +84,7 @@ export default async function JoinTeamPage(props: { params: Promise<{ teamId: st
         <div className="relative">
           <div
             className="absolute -inset-4 blur-3xl opacity-20 pointer-events-none"
-            style={{ background: isFull || isExpired ? "var(--gold-500)" : "var(--crimson-500)" }}
+            style={{ background: isFull ? "var(--gold-500)" : "var(--crimson-500)" }}
             aria-hidden="true"
           />
           <div className="relative z-10">
