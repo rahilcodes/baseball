@@ -46,8 +46,8 @@ export default async function JoinTeamPage(props: { params: Promise<{ teamId: st
   const currentRosterCount = count || 0;
   const isFull = currentRosterCount >= 30;
 
-  // 2. AUTO-EXPIRATION LOGIC (Example: May 1, 2026 cut-off)
-  const isExpired = new Date() > new Date("2026-05-01T00:00:00Z");
+  // 2. ROSTER CAP LOGIC — No expiry date; controlled solely by global registrations_open flag above
+  // isExpired removed — registration open/close is managed via admin panel
 
   return (
     <div className="pt-32 pb-24">
@@ -56,27 +56,25 @@ export default async function JoinTeamPage(props: { params: Promise<{ teamId: st
           <div
             className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6 transition-colors"
             style={{ 
-              background: isFull || isExpired ? "rgba(245,166,35,0.1)" : "rgba(227,27,35,0.1)", 
-              border: `1px solid ${isFull || isExpired ? "rgba(245,166,35,0.2)" : "rgba(227,27,35,0.2)"}` 
+              background: isFull ? "rgba(245,166,35,0.1)" : "rgba(227,27,35,0.1)", 
+              border: `1px solid ${isFull ? "rgba(245,166,35,0.2)" : "rgba(227,27,35,0.2)"}` 
             }}
             aria-hidden="true"
           >
-            <Users size={32} style={{ color: isFull || isExpired ? "var(--gold-400)" : "var(--crimson-400)" }} />
+            <Users size={32} style={{ color: isFull ? "var(--gold-400)" : "var(--crimson-400)" }} />
           </div>
           
-          <span className={isFull || isExpired ? "badge badge-gold mb-4" : "badge badge-navy mb-4"} aria-hidden="true">
-            {isExpired ? "Registration Closed" : isFull ? "Roster Full" : "Team Invitation"}
+          <span className={isFull ? "badge badge-gold mb-4" : "badge badge-navy mb-4"} aria-hidden="true">
+            {isFull ? "Roster Full" : "Team Invitation"}
           </span>
           
           <h1 className="font-heading font-bold text-3xl sm:text-5xl mb-4" style={{ color: "var(--slate-50)" }}>
-            {isExpired || isFull ? teamName : <>Join <span className="gradient-text">{teamName}</span></>}
+            {isFull ? teamName : <>Join <span className="gradient-text">{teamName}</span></>}
           </h1>
           
           <p className="text-sm sm:text-base leading-relaxed" style={{ color: "var(--slate-400)" }}>
-            {isExpired 
-              ? "The league registration deadline has passed. Late additions must be approved manually by the Commissioner."
-              : isFull 
-              ? `This team has reached the maximum league limit of 20 registered players. No further registrations can be processed.`
+            {isFull 
+              ? `This team has reached the maximum league limit of 30 registered players. No further registrations can be processed.`
               : <>You have been invited by your manager to join the roster for Season 1.<br className="hidden sm:block" /> Complete your player profile and sign the mandatory liability waiver below.</>
             }
           </p>
@@ -90,9 +88,9 @@ export default async function JoinTeamPage(props: { params: Promise<{ teamId: st
             aria-hidden="true"
           />
           <div className="relative z-10">
-            {isExpired || isFull ? (
+            {isFull ? (
               <div className="glass-card p-10 sm:p-16 text-center text-slate-300">
-                <p>If you believe this is a mistake, please contact your team manager directly.</p>
+                <p>This team roster is full. Please contact your team manager directly.</p>
               </div>
             ) : (
               <PlayerJoinForm teamId={params.teamId} />
