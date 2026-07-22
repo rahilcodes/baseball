@@ -33,7 +33,7 @@ type PlayoffDay = GameDay & { round: string; };
 const PLAYOFFS: PlayoffDay[] = [
   {
     date: "Saturday, July 25, 2026", isoDate: "2026-07-25", round: "Championship Finals", games: [
-      { time: "10:00 AM", home: "Raiders Baseball Club", away: "PENDEKAR BESBOL TEAM", location: LOCATION },
+      { time: "10:30 AM", home: "Raiders Baseball Club", away: "PENDEKAR BESBOL TEAM", location: LOCATION },
     ],
   },
 ];
